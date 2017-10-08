@@ -25,10 +25,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    smartcarwindow.cpp \
+    smartcarboard.cpp \
+    smartcarboardcell.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    smartcarwindow.h \
+    smartcarboard.h \
+    smartcarboardcell.h
 
 FORMS += \
-        mainwindow.ui
+    smartcarwindow.ui \
+    mainwindow.ui
