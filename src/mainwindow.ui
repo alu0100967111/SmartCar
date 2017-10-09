@@ -28,6 +28,9 @@
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">
        <widget class="QWidget" name="widget_2" native="true">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
           <widget class="QLabel" name="label">

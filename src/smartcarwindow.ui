@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>SmartCarWindow</class>
- <widget class="QDialog" name="SmartCarWindow">
+ <widget class="QMainWindow" name="SmartCarWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>760</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>MainWindow</string>
   </property>
-  <property name="sizeGripEnabled">
-   <bool>false</bool>
-  </property>
-  <layout class="QGridLayout" name="gridLayout"/>
+  <widget class="QWidget" name="SmartCarWidget">
+   <layout class="QGridLayout" name="gridLayout_2"/>
+  </widget>
  </widget>
  <resources/>
  <connections/>

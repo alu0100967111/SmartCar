@@ -39,5 +39,5 @@ HEADERS += \
     error.h
 
 FORMS += \
-    smartcarwindow.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    smartcarwindow.ui

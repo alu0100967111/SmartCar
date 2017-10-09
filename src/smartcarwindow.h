@@ -1,7 +1,7 @@
 #ifndef SMARTCARWINDOW_H
 #define SMARTCARWINDOW_H
 
-#include <QDialog>
+#include <QMainWindow>
 #include <QGridLayout>
 
 #include "smartcarboard.h"
@@ -11,7 +11,7 @@ class SmartCarWindow;
 }
 
 // Clase de la Ventana de SmartCar
-class SmartCarWindow : public QDialog
+class SmartCarWindow : public QMainWindow
 {
     Q_OBJECT
 
