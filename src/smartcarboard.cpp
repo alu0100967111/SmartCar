@@ -1,6 +1,6 @@
 #include "smartcarboard.h"
 
-SmartCarBoard::SmartCarBoard(const struct params &config):
+SmartCarBoard::SmartCarBoard(const struct params &config, const struct screen_size_struct &screen):
     row_number(config.row_number),
     column_number(config.col_number),
     is_car(false),
@@ -12,7 +12,7 @@ SmartCarBoard::SmartCarBoard(const struct params &config):
     for (int i = 0; i < row_number; ++i) {
         QVector<SmartCarBoardCell*> label_row;
         for (int j = 0; j < column_number; ++j){
-            label_row.push_back(new SmartCarBoardCell(this, i, j));
+            label_row.push_back(new SmartCarBoardCell(this, i, j, screen));
         }
         smart_car_board.push_back(label_row);
     }

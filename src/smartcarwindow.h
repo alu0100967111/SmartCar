@@ -27,7 +27,7 @@ private:
     void InicializeLayout(const int row, const int column);
 
     QGridLayout* smart_car_layout;
-    SmartCarBoard smart_car_board;
+    SmartCarBoard* smart_car_board;
 };
 
 #endif // SMARTCARWINDOW_H

@@ -13,10 +13,15 @@ struct params{
     int block_number;
 };
 
+struct screen_size_struct{
+    int width;
+    int height;
+};
+
 class SmartCarBoard
 {
 public:
-    SmartCarBoard(const struct params &config);
+    SmartCarBoard(const struct params &config, const struct screen_size_struct &screen);
     ~SmartCarBoard();
     void ResizeCells();
 
@@ -31,7 +36,7 @@ private:
     bool is_aim;
 
 public:
-    QVector<QVector<SmartCarBoardCell*>> smart_car_board;
+    QVector<QVector<SmartCarBoardCell*> > smart_car_board;
 };
 
 #endif // SMARTCARBOARD_H
