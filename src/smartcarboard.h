@@ -7,13 +7,13 @@ struct params;
 
 #include <smartcarboardcell.h>
 
-struct params{
+struct params {
     int row_number;
     int col_number;
     int block_number;
 };
 
-struct screen_size_struct{
+struct size_struct {
     int width;
     int height;
 };
@@ -21,9 +21,8 @@ struct screen_size_struct{
 class SmartCarBoard
 {
 public:
-    SmartCarBoard(const struct params &config, const struct screen_size_struct &screen);
+    SmartCarBoard(const struct params &config, const struct size_struct &frame_size);
     ~SmartCarBoard();
-    void ResizeCells();
 
 public slots:
     void slot_cell_clicked(int i, int j);

@@ -14,7 +14,7 @@ class SmartCarBoardCell : public QLabel
     Q_OBJECT
 
 public:
-    explicit SmartCarBoardCell(SmartCarBoard* smart_car_board_in, const int x, const int y, const struct screen_size_struct &screen);
+    explicit SmartCarBoardCell(SmartCarBoard* smart_car_board_in, const int x, const int y, const struct size_struct &frame_size);
     virtual ~SmartCarBoardCell();
 
 signals:
