@@ -1,11 +1,8 @@
 #ifndef BLOCKTYPECELL_H
 #define BLOCKTYPECELL_H
 
-
-class BlockTypeCell : public SmartCarBoardCell
+class BlockTypeCell
 {
-public:
-    BlockTypeCell();
 };
 
 #endif // BLOCKTYPECELL_H

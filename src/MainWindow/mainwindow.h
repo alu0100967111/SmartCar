@@ -6,8 +6,8 @@
 #include <QDesktopWidget>
 #include <QDebug>
 
-#include "error.h"
-#include "smartcarwindow.h"
+#include "Common/error.h"
+#include "SmartCarWindow/smartcarwindow.h"
 
 namespace Ui {
 class MainWindow;

@@ -1,11 +1,8 @@
 #ifndef CARTYPECELL_H
 #define CARTYPECELL_H
 
-
-class CarTypeCell : public SmartCarBoardCell
+class CarTypeCell
 {
-public:
-    CarTypeCell();
 };
 
 #endif // CARTYPECELL_H

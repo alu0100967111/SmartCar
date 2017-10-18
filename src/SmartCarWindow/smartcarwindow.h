@@ -7,7 +7,7 @@
 #include <QDesktopWidget>
 #include <QSizePolicy>
 
-#include "smartcarboard.h"
+#include "SmartCarBoard/smartcarboard.h"
 
 namespace Ui {
 class SmartCarWindow;

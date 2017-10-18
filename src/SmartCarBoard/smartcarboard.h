@@ -5,7 +5,7 @@
 
 struct params;
 
-#include <smartcarboardcell.h>
+#include "SmartCarBoard/SmartCarBoardCell/smartcarboardcell.h"
 
 struct params {
     int row_number;

@@ -1,5 +1,6 @@
-#include "smartcarboardcell.h"
-#include "smartcarboard.h"
+#include "SmartCarBoard/SmartCarBoardCell/smartcarboardcell.h"
+#include "SmartCarBoard/smartcarboard.h"
+
 
 SmartCarBoardCell::SmartCarBoardCell(SmartCarBoard *smart_car_board_in, const int x, const int y, const struct size_struct &frame_size):
     smart_car_board(smart_car_board_in),

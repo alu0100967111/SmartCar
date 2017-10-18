@@ -3,9 +3,9 @@
 #include <QDebug>
 #include <QLabel>
 
-#include "smartcarboard.h"
-#include "mainwindow.h"
-#include "error.h"
+#include "SmartCarBoard/smartcarboard.h"
+#include "MainWindow/mainwindow.h"
+#include "Common/error.h"
 
 int QGridLayout::heightForWidth(int w) const {
     return w;
