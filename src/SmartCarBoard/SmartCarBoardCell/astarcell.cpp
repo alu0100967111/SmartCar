@@ -1,6 +1,6 @@
 #include "astarcell.h"
 
-AStarCell::AStarCell(int x_pos, int y_pos, int type, int f_score, int g_score, int h_score):
+AStarCell::AStarCell(int x_pos, int y_pos, int f_score, int g_score, int h_score):
   x_pos_(x_pos),
   y_pos_(y_pos),
   f_score_(f_score),
@@ -9,15 +9,7 @@ AStarCell::AStarCell(int x_pos, int y_pos, int type, int f_score, int g_score, i
   start_(false),
   goal_(false),
   obstacle_(false),
-  father_(NULL) //TODO: Pass to smartpointer
-{
-  switch (type) {
-    case (0): start_ = true; break;
-    case (1): goal_ = true; break;
-    case (2): obstacle_ = true; break;
-    default: break;
-  }
-}
+  father_(NULL){} //TODO: Pass to smartpointer
 
 AStarCell::AStarCell(const AStarCell &cell)
 {
@@ -39,6 +31,8 @@ int AStarCell::get_x_pos() const { return x_pos_; }
 
 int AStarCell::get_y_pos() const { return y_pos_; }
 
+std::pair<int, int> AStarCell::get_pos() const { return std::pair<int, int>(x_pos_, y_pos_); }
+
 AStarCell* AStarCell::get_father() const { return father_; }
 
 void AStarCell::set_f_score(int f_score)
@@ -56,6 +50,16 @@ void AStarCell::set_h_score(int h_score)
   h_score_ = h_score;
 }
 
+void AStarCell::set_type(int type)
+{
+  switch (type) {
+    case (0): start_ = true; break;
+    case (1): goal_ = true; break;
+    case (2): obstacle_ = true; break;
+    default: break;
+  }
+}
+
 void AStarCell::set_father(AStarCell* father)
 {
   father_ = father;
@@ -71,6 +75,24 @@ bool AStarCell::operator< (const AStarCell& cell) const
   else { return false; }
 }
 
+bool AStarCell::operator== (const AStarCell& cell) const
+{
+    if (x_pos_ == cell.x_pos_) { return false; }
+    else if (y_pos_ == cell.y_pos_) { return false; }
+    else if (f_score_ == cell.f_score_) { return false; }
+    else if (g_score_ == cell.g_score_) { return false; }
+    else if (h_score_ == cell.h_score_) { return false; }
+    else if (start_ == cell.start_) { return false; }
+    else if (goal_ == cell.goal_) { return false; }
+    else if (obstacle_ == cell.obstacle_) { return false; }
+    else { return true; }
+}
+
+bool AStarCell::operator!= (const AStarCell& cell) const
+{
+    return !(*this == cell);
+}
+
 const AStarCell& AStarCell::operator= (const AStarCell& cell)
 {
   x_pos_ = cell.x_pos_;
@@ -81,4 +103,12 @@ const AStarCell& AStarCell::operator= (const AStarCell& cell)
   start_ = cell.start_;
   goal_ = cell.goal_;
   obstacle_ = cell.obstacle_;
+}
+
+std::ostream& operator<< (std::ostream& os, const AStarCell& cell)
+{
+    if (cell.start_) { os << "I"; }
+    else if (cell.goal_) { os << "F"; }
+    else if (cell.obstacle_) { os << "O"; }
+    else { os << "."; }
 }

@@ -1,7 +1,6 @@
 #include "SmartCarBoard/SmartCarBoardCell/smartcarboardcell.h"
 #include "SmartCarBoard/smartcarboard.h"
 
-
 SmartCarBoardCell::SmartCarBoardCell(SmartCarBoard* smart_car_board_in, const struct size_struct &frame_size, int x_pos, int y_pos):
   smart_car_board(smart_car_board_in),
   x_pos_(x_pos),
@@ -63,4 +62,3 @@ void SmartCarBoardCell::set_obstacle() {
     this -> setStyleSheet("background-color:black;");
     obstacle_ = true;
 }
-

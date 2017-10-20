@@ -19,6 +19,7 @@ public:
 
     int get_x_pos();
     int get_y_pos();
+    std::pair<int, int> get_pos();
     bool is_car();
     bool is_goal();
     bool is_obstacle();

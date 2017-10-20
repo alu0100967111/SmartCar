@@ -2,11 +2,20 @@
 #define SMARTCARBOARD_H
 
 #include <QVector>
-
-struct params;
-
+#include <SmartCarBoard/SmartCarBoardCell/astarcell.h>
 #include "SmartCarBoard/SmartCarBoardCell/smartcarboardcell.h"
 #include "Common/error.h"
+
+#include <vector>
+#include <set>
+#include <algorithm>
+#include <iostream>
+
+using Position = std::pair<int, int>;
+using Path = std::vector<Position>;
+using AStarSet = std::set<AStarCell>; // SET PARA OPEN Y CLOSED
+using AStarVector = std::vector<AStarCell>;
+using AStarBoard = std::vector<AStarVector>; // TABLERO (VECTOR)
 
 struct params {
     int row_number;
@@ -26,17 +35,27 @@ public:
     ~SmartCarBoard();
 
 public slots:
-    void slot_cell_clicked(int i, int j);
+    void slot_cell_clicked(int x_pos, int y_pos);
 
 private:
     int row_number_;
     int column_number_;
     int block_number_;
-    bool is_car_;
-    bool is_goal_;
+
+    Position car_position_;
+    Position goal_position_;
+    std::set<Position> obstacle_positions_;
 
 public:
     QVector<QVector<SmartCarBoardCell*> > smart_car_board_;
+
+private:
+    Path AStar_Algorithm();
+    AStarBoard InitializeBoardAStar(AStarCell& start, AStarCell& goal);
+    void PrintAStarBoard(const AStarBoard &board, AStarCell& start, AStarCell& goal);
+    int AStarDistanceBetween(AStarCell& current_cell, AStarCell& start);
+    double AStarEstimateCost(AStarCell& neighbour_cell, AStarCell& goal);
+    Path AStarReconstructPath(AStarCell* current_cell);
 };
 
 #endif // SMARTCARBOARD_H
