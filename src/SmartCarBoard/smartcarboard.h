@@ -6,6 +6,7 @@
 struct params;
 
 #include "SmartCarBoard/SmartCarBoardCell/smartcarboardcell.h"
+#include "Common/error.h"
 
 struct params {
     int row_number;
@@ -28,14 +29,14 @@ public slots:
     void slot_cell_clicked(int i, int j);
 
 private:
-    int row_number;
-    int column_number;
-    int block_number;
-    bool is_car;
-    bool is_aim;
+    int row_number_;
+    int column_number_;
+    int block_number_;
+    bool is_car_;
+    bool is_goal_;
 
 public:
-    QVector<QVector<SmartCarBoardCell*> > smart_car_board;
+    QVector<QVector<SmartCarBoardCell*> > smart_car_board_;
 };
 
 #endif // SMARTCARBOARD_H

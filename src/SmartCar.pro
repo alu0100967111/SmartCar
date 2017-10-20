@@ -31,7 +31,8 @@ SOURCES += \
     SmartCarWindow/smartcarwindow.cpp \
     MainWindow/mainwindow.cpp \
     Common/error.cpp \  
-    main.cpp
+    main.cpp \
+    SmartCarBoard/SmartCarBoardCell/astarcell.cpp
 
 HEADERS += \
     SmartCarBoard/SmartCarBoardCell/ExtendedCells/aimtypecell.h \
@@ -41,7 +42,8 @@ HEADERS += \
     SmartCarBoard/smartcarboard.h \
     SmartCarWindow/smartcarwindow.h \
     MainWindow/mainwindow.h \
-    Common/error.h
+    Common/error.h \
+    SmartCarBoard/SmartCarBoardCell/astarcell.h
 
 FORMS += \
     UI/mainwindow.ui \

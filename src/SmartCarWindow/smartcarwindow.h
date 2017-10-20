@@ -3,9 +3,9 @@
 
 #include <QMainWindow>
 #include <QGridLayout>
-#include <QApplication>
-#include <QDesktopWidget>
-#include <QSizePolicy>
+#include <QApplication> // Para coger tamaño pantalla
+#include <QDesktopWidget> // Para coger tamaño pantalla
+#include <QShowEvent>
 
 #include "SmartCarBoard/smartcarboard.h"
 
@@ -29,6 +29,7 @@ private:
     void InicializeLayout(const int row, const int column);
     struct size_struct GetFrameSize(const struct params &config);
 
+protected:
     QGridLayout* smart_car_layout;
     SmartCarBoard* smart_car_board;
 };

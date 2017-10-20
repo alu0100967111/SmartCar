@@ -2,11 +2,15 @@
 #include "SmartCarBoard/smartcarboard.h"
 
 
-SmartCarBoardCell::SmartCarBoardCell(SmartCarBoard *smart_car_board_in, const int x, const int y, const struct size_struct &frame_size):
-    smart_car_board(smart_car_board_in),
-    x_position(x),
-    y_position(y)
+SmartCarBoardCell::SmartCarBoardCell(SmartCarBoard* smart_car_board_in, const struct size_struct &frame_size, int x_pos, int y_pos):
+  smart_car_board(smart_car_board_in),
+  x_pos_(x_pos),
+  y_pos_(y_pos),
+  car_(false),
+  goal_(false),
+  obstacle_(false)
 {
+    // Opciones de diseño
     this -> setFrameShape(QFrame::Box);
     this -> setFrameShadow(QFrame::Plain);
     this -> setLineWidth(2);
@@ -32,5 +36,31 @@ bool SmartCarBoardCell::event(QEvent* event)
 
 void SmartCarBoardCell::slot_cell_clicked()
 {
-    smart_car_board->slot_cell_clicked(x_position,y_position);
+    smart_car_board->slot_cell_clicked(x_pos_,y_pos_);
 }
+
+int SmartCarBoardCell::get_x_pos() { return x_pos_; }
+
+int SmartCarBoardCell::get_y_pos() { return y_pos_; }
+
+bool SmartCarBoardCell::is_car() { return car_; }
+
+bool SmartCarBoardCell::is_goal() { return goal_; }
+
+bool SmartCarBoardCell::is_obstacle() { return obstacle_; }
+
+void SmartCarBoardCell::set_car() {
+    this -> setPixmap(QPixmap("../photos/car.png").scaled(this->width(),this->height(),Qt::KeepAspectRatio));
+    car_ = true;
+}
+
+void SmartCarBoardCell::set_goal() {
+    this -> setPixmap(QPixmap("../photos/goal.png").scaled(this->width(),this->height(),Qt::KeepAspectRatio));
+    goal_ = true;
+}
+
+void SmartCarBoardCell::set_obstacle() {
+    this -> setStyleSheet("background-color:black;");
+    obstacle_ = true;
+}
+

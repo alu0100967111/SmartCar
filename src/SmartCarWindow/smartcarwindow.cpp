@@ -54,7 +54,7 @@ void SmartCarWindow::InicializeLayout(const int row, const int column)
 {
     for (int i = 0; i < row; ++i) {
         for (int j = 0; j < column; ++j) {
-            smart_car_layout->addWidget(smart_car_board->smart_car_board[i][j],i,j); // TODO: Poner privado...
+            smart_car_layout->addWidget(smart_car_board->smart_car_board_[i][j],i,j); // TODO: Poner privado...
         }
     }
 }
