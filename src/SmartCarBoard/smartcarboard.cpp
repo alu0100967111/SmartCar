@@ -9,7 +9,6 @@ SmartCarBoard::SmartCarBoard(const struct params &config,const struct size_struc
     block_number_(config.block_number)
 {
     // Inicializamos Tablero
-
     for (int i = 0; i < row_number_; ++i) {
         QVector<SmartCarBoardCell*> label_row;
         for (int j = 0; j < column_number_; ++j) {
@@ -19,8 +18,7 @@ SmartCarBoard::SmartCarBoard(const struct params &config,const struct size_struc
     }
 }
 
-SmartCarBoard::~SmartCarBoard()
-{}
+SmartCarBoard::~SmartCarBoard() {}
 
 void SmartCarBoard::slot_cell_clicked(int x_pos, int y_pos)
 {
@@ -39,18 +37,15 @@ void SmartCarBoard::slot_cell_clicked(int x_pos, int y_pos)
         Path path;
         obstacle_positions_.insert(Position(x_pos, y_pos)); block_number_--;
 
-        SmartCarBoardCell* aux = new SmartCarBoardCell(*smart_car_board_[x_pos][y_pos]);
-        aux -> set_obstacle();
-        delete smart_car_board_[x_pos][y_pos];
-        smart_car_board_[x_pos][y_pos] = new SmartCarBoardCell(*aux);
-        QThread::sleep(1);
+        smart_car_board_[x_pos][y_pos] -> set_obstacle();
+        qApp->processEvents(); // Proceso eventos
 
         if (block_number_ == 0) {
+            QThread::sleep(2);
             path = AStar_Algorithm();
-            for ( auto x : path ) {
-                std::cout << " { " << x.first << "," << x.second << " } ";
-            }
-            exit(1);
+            // TODO: Si no hay camino?
+            for ( auto x : path ) { std::cout << " { " << x.first << "," << x.second << " } ";}
+            exit(1); // TODO: ¿Queremos esto?
         }
     }
 }
@@ -102,7 +97,14 @@ Path SmartCarBoard::AStar_Algorithm()
             neighbour_cell.set_father(aux);
           }
 
-          //  Inserto la celda cambiada!
+          //  Inserto la celda cambiada! Si ya estaba esa posicion la elimino
+
+          AStarSet open_set_copy = open_set;
+          for (auto cell: open_set) { //TODO: ¿Se podria cambiar este for modificacando el operador < de celda?
+            if (cell.get_pos() == neighbour_cell.get_pos())
+              open_set_copy.erase(cell);
+          }
+          open_set = open_set_copy;
           open_set.insert(neighbour_cell);
         }
       }
@@ -172,12 +174,11 @@ double SmartCarBoard::AStarEstimateCost(AStarCell& neighbour_cell, AStarCell& go
 
 void SmartCarBoard::PrintAStarBoard(const AStarBoard& board, const AStarSet& open_set, const AStarSet& closed_set)
 {
-    // TODO: Poner hilo
     for (int i = 0; i < board.size(); ++i) {
         for (int j = 0; j < board[i].size(); ++j) {
             if (open_set.find(board[i][j]) != open_set.end()) {
                 if (board[i][j] == *open_set.begin()) { // Es el coche
-                    smart_car_board_[car_position_.first][car_position_.second] -> setStyleSheet("background-color:brown;");
+                    smart_car_board_[car_position_.first][car_position_.second] -> setPixmap(QPixmap("../photos/empty.png"));
                     car_position_ = Position(i, j);
                     smart_car_board_[i][j] -> set_car();
                 }
@@ -190,6 +191,9 @@ void SmartCarBoard::PrintAStarBoard(const AStarBoard& board, const AStarSet& ope
             }
         }
     }
+
+    qApp->processEvents();
+    QThread::msleep(200);
 }
 
 Path SmartCarBoard::AStarReconstructPath(AStarCell* current_cell)

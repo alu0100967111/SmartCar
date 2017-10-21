@@ -9,7 +9,7 @@ AStarCell::AStarCell(int x_pos, int y_pos, int f_score, int g_score, int h_score
   start_(false),
   goal_(false),
   obstacle_(false),
-  father_(NULL){} //TODO: Pass to smartpointer
+  father_(NULL){}
 
 AStarCell::AStarCell(const AStarCell &cell)
 {

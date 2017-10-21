@@ -8,7 +8,7 @@
 class AStarCell
 {
 
-public: // TEMP
+public: // TODO: Poner setters y getters y modificar
     bool start_;
     bool goal_;
     bool obstacle_;
@@ -21,7 +21,7 @@ private:
   int f_score_; // For each node, the total cost of getting to the goal by passing that node. It's partly heuristic.
   int g_score_; // For each node, the cost of getting from the start node to that node.
   int h_score_; // For each node, the heuristic distance to get to the goal. Only used in comparations.
-  AStarCell* father_; // Where came from
+  AStarCell* father_; // Where came from  TODO: Pass to smartpointer
 
 public:
 

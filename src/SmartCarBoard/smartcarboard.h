@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QFrame>
 #include <QThread>
+#include <QCoreApplication>
 
 #include <vector>
 #include <set>
