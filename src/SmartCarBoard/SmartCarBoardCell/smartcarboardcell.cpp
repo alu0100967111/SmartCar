@@ -13,12 +13,22 @@ SmartCarBoardCell::SmartCarBoardCell(SmartCarBoard* smart_car_board_in, const st
     this -> setFrameShape(QFrame::Box);
     this -> setFrameShadow(QFrame::Plain);
     this -> setLineWidth(2);
+    this -> setScaledContents(true);
 
     this -> setMinimumSize(frame_size.height,frame_size.width);
     this -> setMaximumSize(frame_size.height,frame_size.width);
-    this -> setScaledContents(true);
 
     connect(this, SIGNAL (cell_clicked()), this, SLOT (slot_cell_clicked()));
+}
+
+SmartCarBoardCell::SmartCarBoardCell(const SmartCarBoardCell& cell)
+{
+    *this = cell;
+
+    this -> setFrameShape(QFrame::Box);
+    this -> setFrameShadow(QFrame::Plain);
+    this -> setLineWidth(2);
+    this -> setScaledContents(true);
 }
 
 SmartCarBoardCell::~SmartCarBoardCell() {}
@@ -61,4 +71,15 @@ void SmartCarBoardCell::set_goal() {
 void SmartCarBoardCell::set_obstacle() {
     this -> setStyleSheet("background-color:black;");
     obstacle_ = true;
+}
+
+void SmartCarBoardCell::operator =(const SmartCarBoardCell& cell)
+{
+    x_pos_ = cell.x_pos_;
+    y_pos_ = cell.y_pos_;
+    car_ = cell.car_;
+    goal_ = cell.goal_;
+    obstacle_ = cell.obstacle_;
+    this -> setMinimumSize(cell.minimumSize());
+    this -> setMaximumSize(cell.maximumSize());
 }

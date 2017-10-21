@@ -13,13 +13,10 @@ AStarCell::AStarCell(int x_pos, int y_pos, int f_score, int g_score, int h_score
 
 AStarCell::AStarCell(const AStarCell &cell)
 {
-  *this = cell;
+    *this = cell;
 }
 
-AStarCell::~AStarCell()
-{
-
-}
+AStarCell::~AStarCell(){}
 
 int AStarCell::get_f_score() const { return f_score_; }
 
@@ -77,14 +74,8 @@ bool AStarCell::operator< (const AStarCell& cell) const
 
 bool AStarCell::operator== (const AStarCell& cell) const
 {
-    if (x_pos_ == cell.x_pos_) { return false; }
-    else if (y_pos_ == cell.y_pos_) { return false; }
-    else if (f_score_ == cell.f_score_) { return false; }
-    else if (g_score_ == cell.g_score_) { return false; }
-    else if (h_score_ == cell.h_score_) { return false; }
-    else if (start_ == cell.start_) { return false; }
-    else if (goal_ == cell.goal_) { return false; }
-    else if (obstacle_ == cell.obstacle_) { return false; }
+    if (x_pos_ != cell.x_pos_) { return false; }
+    else if (y_pos_ != cell.y_pos_) { return false; }
     else { return true; }
 }
 
@@ -103,6 +94,7 @@ const AStarCell& AStarCell::operator= (const AStarCell& cell)
   start_ = cell.start_;
   goal_ = cell.goal_;
   obstacle_ = cell.obstacle_;
+  father_ = cell.father_; //OJO
 }
 
 std::ostream& operator<< (std::ostream& os, const AStarCell& cell)

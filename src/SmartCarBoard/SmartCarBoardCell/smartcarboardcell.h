@@ -15,6 +15,7 @@ class SmartCarBoardCell : public QLabel
 
 public:
     explicit SmartCarBoardCell(SmartCarBoard* smart_car_board_in, const struct size_struct &frame_size, int x_pos, int y_pos);
+    SmartCarBoardCell(const SmartCarBoardCell& cell);
     virtual ~SmartCarBoardCell();
 
     int get_x_pos();
@@ -27,6 +28,8 @@ public:
     void set_car();
     void set_goal();
     void set_obstacle();
+
+    void operator =(const SmartCarBoardCell& cell);
 
 signals:
     void cell_clicked();

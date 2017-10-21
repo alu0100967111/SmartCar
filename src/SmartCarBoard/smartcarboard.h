@@ -2,14 +2,19 @@
 #define SMARTCARBOARD_H
 
 #include <QVector>
-#include <SmartCarBoard/SmartCarBoardCell/astarcell.h>
-#include "SmartCarBoard/SmartCarBoardCell/smartcarboardcell.h"
-#include "Common/error.h"
+#include <Qt>
+#include <QLabel>
+#include <QFrame>
+#include <QThread>
 
 #include <vector>
 #include <set>
 #include <algorithm>
 #include <iostream>
+
+#include <SmartCarBoard/SmartCarBoardCell/astarcell.h>
+#include "SmartCarBoard/SmartCarBoardCell/smartcarboardcell.h"
+#include "Common/error.h"
 
 using Position = std::pair<int, int>;
 using Path = std::vector<Position>;
@@ -51,9 +56,9 @@ public:
 
 private:
     Path AStar_Algorithm();
-    AStarBoard InitializeBoardAStar(AStarCell& start, AStarCell& goal);
-    void PrintAStarBoard(const AStarBoard &board, AStarCell& start, AStarCell& goal);
-    int AStarDistanceBetween(AStarCell& current_cell, AStarCell& start);
+    AStarBoard InitializeBoardAStar();
+    void PrintAStarBoard(const AStarBoard &board, const AStarSet &open_set, const AStarSet &closed_set);
+    int AStarDistance(AStarCell &current_cell);
     double AStarEstimateCost(AStarCell& neighbour_cell, AStarCell& goal);
     Path AStarReconstructPath(AStarCell* current_cell);
 };

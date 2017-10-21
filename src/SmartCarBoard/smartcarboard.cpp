@@ -38,32 +38,41 @@ void SmartCarBoard::slot_cell_clicked(int x_pos, int y_pos)
         qDebug() << "It's a block";
         Path path;
         obstacle_positions_.insert(Position(x_pos, y_pos)); block_number_--;
-        smart_car_board_[x_pos][y_pos] -> set_obstacle();
-        if (block_number_ == 0) { path = AStar_Algorithm(); }
-        for ( auto x : path ) {
-            std::cout << " { " << x.first << "," << x.second << " } ";
+
+        SmartCarBoardCell* aux = new SmartCarBoardCell(*smart_car_board_[x_pos][y_pos]);
+        aux -> set_obstacle();
+        delete smart_car_board_[x_pos][y_pos];
+        smart_car_board_[x_pos][y_pos] = new SmartCarBoardCell(*aux);
+        QThread::sleep(1);
+
+        if (block_number_ == 0) {
+            path = AStar_Algorithm();
+            for ( auto x : path ) {
+                std::cout << " { " << x.first << "," << x.second << " } ";
+            }
+            exit(1);
         }
     }
 }
 
 Path SmartCarBoard::AStar_Algorithm()
 {
-  AStarCell start, goal;
-  AStarBoard board = InitializeBoardAStar(start, goal);
+  AStarBoard board = InitializeBoardAStar();
+  AStarCell& start = board[car_position_.first][car_position_.second];
+  AStarCell& goal = board[goal_position_.first][goal_position_.second];
 
-  Path came_from = {};
   AStarSet closed_set = {};
-  AStarSet open_set = {start};
+  AStarSet open_set; open_set.insert(start);
 
   while (!open_set.empty()) {
     AStarCell current_cell = *(open_set.begin());
-    if (current_cell == goal) { return AStarReconstructPath(&current_cell); } // TODO: Cambiar
+    if (current_cell == goal) { qDebug() << "Returning Path..."; return AStarReconstructPath(&current_cell); }
 
     int x_pos = current_cell.get_x_pos();
     int y_pos = current_cell.get_y_pos();
 
     closed_set.insert(current_cell);
-    open_set.erase(current_cell);
+    open_set.erase(open_set.begin());
 
     // Para las casillas de alrededor
     for (int i = -1; i <= 1; ++i) {
@@ -79,10 +88,10 @@ Path SmartCarBoard::AStar_Algorithm()
         if (closed_set.count(neighbour_cell) == 0) {
 
           // Si es mayor no es un camino mejor. ¡Al inicial siempre es mejor! (MAX_INT)
-          AStarCell *aux = neighbour_cell.get_father();
-          neighbour_cell.set_father(&current_cell); // Para que funcione distancia
+          AStarCell *aux = board[x_pos][y_pos].get_father();
+          neighbour_cell.set_father(&board[x_pos][y_pos]); // Para que funcione distancia
 
-          int distance = AStarDistanceBetween(neighbour_cell, start);
+          int distance = AStarDistance(neighbour_cell);
 
           if (distance < neighbour_cell.get_g_score()) {
             neighbour_cell.set_g_score(distance);
@@ -98,12 +107,12 @@ Path SmartCarBoard::AStar_Algorithm()
         }
       }
     }
-    PrintAStarBoard(board, start, goal);
+    PrintAStarBoard(board, open_set, closed_set);
   }
   return {};
 }
 
-AStarBoard SmartCarBoard::InitializeBoardAStar(AStarCell& start, AStarCell& goal)
+AStarBoard SmartCarBoard::InitializeBoardAStar()
 {
     AStarBoard board = AStarBoard(row_number_, AStarVector(column_number_));
 
@@ -113,13 +122,11 @@ AStarBoard SmartCarBoard::InitializeBoardAStar(AStarCell& start, AStarCell& goal
                 board[i][j] = AStarCell(i,j);
                 board[i][j].set_g_score(0);
                 board[i][j].set_type(0);
-                start = board[i][j];
             }
             else if ( Position(i,j) == goal_position_ ) {
                 board[i][j] = AStarCell(i,j);
                 board[i][j].set_type(1);
                 board[i][j].set_f_score(0);
-                goal = board[i][j];
             }
             else if ( obstacle_positions_.count(Position(i,j)) != 0 ) {
                 board[i][j] = AStarCell(i,j);
@@ -131,13 +138,14 @@ AStarBoard SmartCarBoard::InitializeBoardAStar(AStarCell& start, AStarCell& goal
     return board;
 }
 
-int SmartCarBoard::AStarDistanceBetween(AStarCell& current_cell, AStarCell& start)
+int SmartCarBoard::AStarDistance(AStarCell& current_cell)
 {
     AStarCell* current_cell_copy = &current_cell;
 
-    int distance = 0;
+    int distance = 0, count= 0;
 
-    while (!(current_cell_copy->start_)) {
+    while (!(current_cell_copy->start_) && (count < 10)) {
+      count ++;
       distance += 10;
       current_cell_copy = current_cell_copy -> get_father();
     }
@@ -151,7 +159,7 @@ double SmartCarBoard::AStarEstimateCost(AStarCell& neighbour_cell, AStarCell& go
     int y_distance = goal.get_y_pos() - neighbour_cell.get_y_pos();
 
     // Euclidian Distance
-    double distance = sqrt((x_distance * x_distance) + (y_distance * y_distance));
+    double distance = (int)sqrt((x_distance * x_distance) + (y_distance * y_distance)) + 0.5;
 
     // Manhattan distance
     //distance = abs(x_distance) + abs(y_distance);
@@ -162,19 +170,31 @@ double SmartCarBoard::AStarEstimateCost(AStarCell& neighbour_cell, AStarCell& go
     return distance;
 }
 
-void SmartCarBoard::PrintAStarBoard(const AStarBoard& board, AStarCell& start, AStarCell& goal)
+void SmartCarBoard::PrintAStarBoard(const AStarBoard& board, const AStarSet& open_set, const AStarSet& closed_set)
 {
-    for (auto x : board) {
-        for (auto y : x) { std::cout << y; }
-        std::cout << std::endl;
+    // TODO: Poner hilo
+    for (int i = 0; i < board.size(); ++i) {
+        for (int j = 0; j < board[i].size(); ++j) {
+            if (open_set.find(board[i][j]) != open_set.end()) {
+                if (board[i][j] == *open_set.begin()) { // Es el coche
+                    smart_car_board_[car_position_.first][car_position_.second] -> setStyleSheet("background-color:brown;");
+                    car_position_ = Position(i, j);
+                    smart_car_board_[i][j] -> set_car();
+                }
+                else { // Está en la verde
+                    smart_car_board_[i][j] -> setStyleSheet("background-color:green;");
+                }
+            }
+            else if (closed_set.find(board[i][j]) != closed_set.end()) {
+                smart_car_board_[i][j] -> setStyleSheet("background-color:red;");
+            }
+        }
     }
-    std::cout << std::endl;
 }
 
 Path SmartCarBoard::AStarReconstructPath(AStarCell* current_cell)
 {
     Path total_path;
-    total_path.push_back(current_cell -> get_pos());
 
     while (current_cell != NULL) {
        total_path.push_back(current_cell -> get_pos());
