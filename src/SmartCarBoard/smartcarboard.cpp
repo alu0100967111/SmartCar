@@ -74,7 +74,7 @@ Path SmartCarBoard::AStar_Algorithm()
       for(int j = -1; j <= 1; ++j) {
         // Condiciones de siguiente iteración
         if (i == 0 && j == 0) continue; // Es nuestra posición
-        if (x_pos+i < 0 || x_pos+i == row_number_ || y_pos+j < 0 || y_pos+j == column_number_) continue;
+        if (x_pos+i < 0 || x_pos+i >= row_number_ || y_pos+j < 0 || y_pos+j >= column_number_) continue;
 
         AStarCell& neighbour_cell = board[x_pos+i][y_pos+j];
         if (neighbour_cell.obstacle_) continue;
@@ -86,10 +86,10 @@ Path SmartCarBoard::AStar_Algorithm()
           AStarCell *aux = board[x_pos][y_pos].get_father();
           neighbour_cell.set_father(&board[x_pos][y_pos]); // Para que funcione distancia
 
-          int distance = AStarDistance(neighbour_cell);
+          int g_distance = AStarDistance(neighbour_cell);
 
-          if (distance < neighbour_cell.get_g_score()) {
-            neighbour_cell.set_g_score(distance);
+          if (g_distance < neighbour_cell.get_g_score()) {
+            neighbour_cell.set_g_score(g_distance);
             neighbour_cell.set_h_score(AStarEstimateCost(neighbour_cell, goal));
             neighbour_cell.set_f_score(neighbour_cell.get_g_score() + neighbour_cell.get_h_score());
           }
