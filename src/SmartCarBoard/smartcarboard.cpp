@@ -157,8 +157,8 @@ int SmartCarBoard::AStarDistance(AStarCell& current_cell)
 
 double SmartCarBoard::AStarEstimateCost(AStarCell& neighbour_cell, AStarCell& goal)
 {
-    int x_distance = goal.get_x_pos() - neighbour_cell.get_x_pos();
-    int y_distance = goal.get_y_pos() - neighbour_cell.get_y_pos();
+    int x_distance = (goal.get_x_pos() - neighbour_cell.get_x_pos())*10;
+    int y_distance = (goal.get_y_pos() - neighbour_cell.get_y_pos())*10;
 
     // Euclidian Distance
     double distance = (int)sqrt((x_distance * x_distance) + (y_distance * y_distance)) + 0.5;
