@@ -43,6 +43,7 @@ void SmartCarBoard::slot_cell_clicked(int x_pos, int y_pos)
         if (block_number_ == 0) {
             QThread::sleep(2);
             path = AStar_Algorithm();
+
             // TODO: Si no hay camino?
             for ( auto x : path ) { std::cout << " { " << x.first << "," << x.second << " } ";}
             exit(1); // TODO: ¿Queremos esto?
@@ -109,7 +110,7 @@ Path SmartCarBoard::AStar_Algorithm()
         }
       }
     }
-    PrintAStarBoard(board, open_set, closed_set);
+        PrintAStarBoard(board, open_set, closed_set);
   }
   return {};
 }
@@ -178,9 +179,9 @@ void SmartCarBoard::PrintAStarBoard(const AStarBoard& board, const AStarSet& ope
         for (int j = 0; j < board[i].size(); ++j) {
             if (open_set.find(board[i][j]) != open_set.end()) {
                 if (board[i][j] == *open_set.begin()) { // Es el coche
-                    smart_car_board_[car_position_.first][car_position_.second] -> setPixmap(QPixmap("../photos/empty.png"));
-                    car_position_ = Position(i, j);
-                    smart_car_board_[i][j] -> set_car();
+                    //smart_car_board_[car_position_.first][car_position_.second] -> setPixmap(QPixmap("../photos/empty.png"));
+                    //car_position_ = Position(i, j);
+                    //smart_car_board_[i][j] -> set_car();
                 }
                 else { // Está en la verde
                     smart_car_board_[i][j] -> setStyleSheet("background-color:green;");
