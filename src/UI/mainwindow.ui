@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>497</width>
-    <height>243</height>
+    <width>529</width>
+    <height>294</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -53,73 +53,149 @@
         <property name="title">
          <string>Configuración</string>
         </property>
-        <layout class="QGridLayout" name="gridLayout_3">
-         <item row="0" column="0">
-          <layout class="QGridLayout" name="gridLayout_2">
-           <item row="1" column="0">
-            <layout class="QVBoxLayout" name="verticalLayout_6">
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout">
-               <item>
-                <layout class="QVBoxLayout" name="verticalLayout_3">
-                 <item>
-                  <widget class="QLineEdit" name="inputfilas"/>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <layout class="QVBoxLayout" name="verticalLayout_4">
-                 <item>
-                  <widget class="QLineEdit" name="inputcol"/>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <layout class="QVBoxLayout" name="verticalLayout_5">
-                 <item>
-                  <widget class="QLineEdit" name="inputobs"/>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QPushButton" name="simular">
-               <property name="text">
-                <string>Simular</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item row="0" column="0">
-            <layout class="QHBoxLayout" name="horizontalLayout_2">
-             <item>
-              <widget class="QLabel" name="filas">
-               <property name="text">
-                <string>Filas</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="columnas">
-               <property name="text">
-                <string>Columnas</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="obstaculos">
-               <property name="text">
-                <string>Obstáculos</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </item>
-        </layout>
+        <widget class="QWidget" name="">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>491</width>
+           <height>91</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_3">
+              <item>
+               <spacer name="verticalSpacer_3">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="columnas">
+                <property name="text">
+                 <string>Columnas</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="inputfilas"/>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_4">
+              <item>
+               <spacer name="verticalSpacer_2">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Expanding</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="filas">
+                <property name="text">
+                 <string>Filas</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="inputcol"/>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_5">
+              <item>
+               <spacer name="verticalSpacer">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_2">
+                <item alignment="Qt::AlignVCenter">
+                 <widget class="QLabel" name="filas_2">
+                  <property name="text">
+                   <string>Obstáculos</string>
+                  </property>
+                 </widget>
+                </item>
+                <item alignment="Qt::AlignVCenter">
+                 <widget class="QCheckBox" name="auto_checkbox">
+                  <property name="text">
+                   <string>Automático</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="inputobs"/>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QPushButton" name="simular">
+            <property name="minimumSize">
+             <size>
+              <width>147</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="baseSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Simular</string>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>16</width>
+              <height>16</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <zorder>gridLayoutWidget</zorder>
+        <zorder>verticalSpacer</zorder>
+        <zorder>widget_2</zorder>
+        <zorder>checkBox</zorder>
+        <zorder>widget_2</zorder>
+        <zorder>widget_2</zorder>
+        <zorder>verticalLayoutWidget</zorder>
        </widget>
       </item>
      </layout>
@@ -131,7 +207,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>497</width>
+     <width>529</width>
      <height>21</height>
     </rect>
    </property>
@@ -153,18 +229,34 @@
  <resources/>
  <connections>
   <connection>
+   <sender>inputobs</sender>
+   <signal>returnPressed()</signal>
+   <receiver>simular</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>507</x>
+     <y>239</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>450</x>
+     <y>270</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
    <sender>inputcol</sender>
    <signal>returnPressed()</signal>
    <receiver>simular</receiver>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>320</x>
-     <y>189</y>
+     <x>343</x>
+     <y>239</y>
     </hint>
     <hint type="destinationlabel">
-     <x>293</x>
-     <y>220</y>
+     <x>314</x>
+     <y>270</y>
     </hint>
    </hints>
   </connection>
@@ -175,28 +267,28 @@
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>107</x>
-     <y>185</y>
+     <x>130</x>
+     <y>239</y>
     </hint>
     <hint type="destinationlabel">
-     <x>105</x>
-     <y>212</y>
+     <x>126</x>
+     <y>270</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>inputobs</sender>
-   <signal>returnPressed()</signal>
-   <receiver>simular</receiver>
-   <slot>click()</slot>
+   <sender>auto_checkbox</sender>
+   <signal>clicked()</signal>
+   <receiver>inputobs</receiver>
+   <slot>update()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>427</x>
-     <y>184</y>
+     <x>485</x>
+     <y>207</y>
     </hint>
     <hint type="destinationlabel">
-     <x>429</x>
-     <y>207</y>
+     <x>489</x>
+     <y>234</y>
     </hint>
    </hints>
   </connection>

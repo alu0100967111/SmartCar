@@ -95,6 +95,8 @@ const AStarCell& AStarCell::operator= (const AStarCell& cell)
   goal_ = cell.goal_;
   obstacle_ = cell.obstacle_;
   father_ = cell.father_; //OJO
+
+ return cell;
 }
 
 std::ostream& operator<< (std::ostream& os, const AStarCell& cell)
@@ -103,4 +105,6 @@ std::ostream& operator<< (std::ostream& os, const AStarCell& cell)
     else if (cell.goal_) { os << "F"; }
     else if (cell.obstacle_) { os << "O"; }
     else { os << "."; }
+
+    return os;
 }

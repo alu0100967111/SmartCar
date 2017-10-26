@@ -25,11 +25,12 @@ public:
 
 public slots:
     bool on_simular_clicked();
-
+    void on_auto_checkbox_clicked();
     //void on_inputcol_returnPressed();
 
 private:
     Ui::MainWindow *ui;
+    bool auto_;
     struct params config;
 };
 
