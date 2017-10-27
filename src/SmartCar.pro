@@ -48,3 +48,7 @@ HEADERS += \
 FORMS += \
     UI/mainwindow.ui \
     UI/smartcarwindow.ui
+
+CONFIG += c++11
+
+QMAKE_CXXFLAGS += -std=c++11

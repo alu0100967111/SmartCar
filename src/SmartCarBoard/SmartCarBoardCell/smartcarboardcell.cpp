@@ -1,5 +1,6 @@
-#include "SmartCarBoard/SmartCarBoardCell/smartcarboardcell.h"
 #include "SmartCarBoard/smartcarboard.h"
+#include "SmartCarBoard/SmartCarBoardCell/smartcarboardcell.h"
+
 
 SmartCarBoardCell::SmartCarBoardCell(SmartCarBoard* smart_car_board_in, const struct size_struct &frame_size, int x_pos, int y_pos):
   smart_car_board(smart_car_board_in),
@@ -12,7 +13,7 @@ SmartCarBoardCell::SmartCarBoardCell(SmartCarBoard* smart_car_board_in, const st
     // Opciones de diseño
     this -> setFrameShape(QFrame::Box);
     this -> setFrameShadow(QFrame::Plain);
-    this -> setLineWidth(2);
+    this -> setLineWidth(1);
     this -> setScaledContents(true);
 
     this -> setMinimumSize(frame_size.height,frame_size.width);
@@ -82,4 +83,9 @@ void SmartCarBoardCell::operator =(const SmartCarBoardCell& cell)
     obstacle_ = cell.obstacle_;
     this -> setMinimumSize(cell.minimumSize());
     this -> setMaximumSize(cell.maximumSize());
+}
+
+void SmartCarBoardCell::PaintCell(const QString& color)
+{
+    this -> setStyleSheet(color);
 }

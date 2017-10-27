@@ -29,6 +29,8 @@ public:
     void set_goal();
     void set_obstacle();
 
+    void PaintCell(const QString& color);
+
     void operator =(const SmartCarBoardCell& cell);
 
 signals:
