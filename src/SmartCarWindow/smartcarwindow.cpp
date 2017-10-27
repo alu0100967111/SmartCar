@@ -97,5 +97,8 @@ struct size_struct SmartCarWindow::GetFrameSize(const struct params &config)
 }
 
 void SmartCarWindow::b1_clicked(){
-    exit(EXIT_SUCCESS);
+    exit(1);
+
+    //w.show();
+    //return a.exec();
 }
