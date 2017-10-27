@@ -34,7 +34,7 @@ protected:
     SmartCarBoard* smart_car_board;
 
 public slots:
-    void b1_clicked();
+    int b1_clicked();
 };
 
 #endif // SMARTCARWINDOW_H

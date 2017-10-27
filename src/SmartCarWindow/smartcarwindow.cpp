@@ -1,3 +1,12 @@
+#include <QApplication>
+#include <QObject>
+#include <QDebug>
+#include <QLabel>
+
+#include "SmartCarBoard/smartcarboard.h"
+#include "MainWindow/mainwindow.h"
+#include "Common/error.h"
+/////////////////////////////////////////////////////
 #include "smartcarwindow.h"
 #include "ui_smartcarwindow.h"
 
@@ -96,9 +105,11 @@ struct size_struct SmartCarWindow::GetFrameSize(const struct params &config)
     return { frame_width, frame_height };
 }
 
-void SmartCarWindow::b1_clicked(){
-    exit(1);
+int SmartCarWindow::b1_clicked(){
 
-    //w.show();
-    //return a.exec();
+    MainWindow* main_window = new MainWindow;
+    main_window->show();
+
+    this->close();
+
 }
