@@ -32,6 +32,9 @@ private:
 protected:
     QGridLayout* smart_car_layout;
     SmartCarBoard* smart_car_board;
+
+public slots:
+    void b1_clicked();
 };
 
 #endif // SMARTCARWINDOW_H

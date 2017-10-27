@@ -16,6 +16,8 @@ SmartCarWindow::SmartCarWindow(const struct params &config, QWidget *parent) :
     InicializeLayout(config.row_number,config.col_number);
 
     ui->SmartCarWidget->setLayout(smart_car_layout);
+
+    connect(ui->b1, SIGNAL(clicked()), this, SLOT(b1_clicked()));
 }
 
 SmartCarWindow::~SmartCarWindow()
@@ -92,4 +94,8 @@ struct size_struct SmartCarWindow::GetFrameSize(const struct params &config)
 
         // 4. Le paso los tamaños de los cuadrados finales al Tablero (SmartCarBoard).
     return { frame_width, frame_height };
+}
+
+void SmartCarWindow::b1_clicked(){
+    exit(EXIT_SUCCESS);
 }

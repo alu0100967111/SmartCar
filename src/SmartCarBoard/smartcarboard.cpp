@@ -44,9 +44,10 @@ void SmartCarBoard::slot_cell_clicked(int x_pos, int y_pos)
             QThread::sleep(2);
             path = AStar_Algorithm();
 
+
             // TODO: Si no hay camino?
             for ( auto x : path ) { std::cout << " { " << x.first << "," << x.second << " } ";}
-            exit(1); // TODO: ¿Queremos esto?
+            //exit(1); // TODO: ¿Queremos esto?
         }
     }
 }
@@ -205,6 +206,10 @@ Path SmartCarBoard::AStarReconstructPath(AStarCell* current_cell)
        total_path.push_back(current_cell -> get_pos());
        current_cell = current_cell -> get_father();
     }
+
+
+    slot_cell_clicked(0,1);
+    //QThread::msleep(5000);
 
     return total_path;
 }
