@@ -12,6 +12,7 @@
 #include <set>
 #include <algorithm>
 #include <iostream>
+#include <QTime>
 
 #include <SmartCarBoard/SmartCarBoardCell/astarcell.h>
 #include "SmartCarBoard/SmartCarBoardCell/smartcarboardcell.h"
@@ -38,7 +39,7 @@ struct size_struct {
 class SmartCarBoard
 {
 public:
-    SmartCarBoard(const struct params &config, const struct size_struct &frame_size);
+    SmartCarBoard(const struct params &config, const struct size_struct &frame_size, const bool &auto_);
     ~SmartCarBoard();
 
 public slots:
@@ -49,6 +50,7 @@ private:
     int column_number_;
     int block_number_;
     int distance_algorithm_;
+    bool auto_;
 
     Position car_position_;
     Position goal_position_;

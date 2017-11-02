@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>529</width>
-    <height>294</height>
+    <width>553</width>
+    <height>335</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -41,7 +41,7 @@
             </size>
            </property>
            <property name="text">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;Bienvenido al simulador de coche autónomo&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Bienvenido al simulador de coche autónomo&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
          </item>
@@ -53,13 +53,13 @@
         <property name="title">
          <string>Configuración</string>
         </property>
-        <widget class="QWidget" name="">
+        <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
            <x>10</x>
            <y>20</y>
-           <width>491</width>
-           <height>91</height>
+           <width>511</width>
+           <height>101</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -189,13 +189,6 @@
           </item>
          </layout>
         </widget>
-        <zorder>gridLayoutWidget</zorder>
-        <zorder>verticalSpacer</zorder>
-        <zorder>widget_2</zorder>
-        <zorder>checkBox</zorder>
-        <zorder>widget_2</zorder>
-        <zorder>widget_2</zorder>
-        <zorder>verticalLayoutWidget</zorder>
        </widget>
       </item>
      </layout>
@@ -207,8 +200,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>529</width>
-     <height>21</height>
+     <width>553</width>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHola">

@@ -6,6 +6,7 @@
 #include <QDesktopWidget>
 #include <QDebug>
 
+
 #include "Common/error.h"
 #include "SmartCarWindow/smartcarwindow.h"
 
@@ -20,6 +21,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     void centerAndResize();
+    bool get_block_conf();
     struct params get_params();
     ~MainWindow();
 

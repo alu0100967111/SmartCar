@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    this -> setWindowFlags(Qt::Window | Qt::MSWindowsFixedSizeDialogHint);
     //this->showMaximized();
     //ui->p_label->setVisible(false);// Set the status of the opposite
 }
@@ -17,11 +17,14 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+bool MainWindow::get_block_conf(){
+    return auto_;
+}
 
 void MainWindow::on_auto_checkbox_clicked()
 {
     if(auto_ == false){
-        ui->inputobs->setPlaceholderText("Introduce % de obstáculos");
+        ui->inputobs->setPlaceholderText("% de obstáculos");
         auto_ = true;
     }else{
         ui->inputobs->setPlaceholderText("");
@@ -55,14 +58,14 @@ bool MainWindow::on_simular_clicked()
        qDebug() << ui->inputobs->text().remove(QChar('%'), Qt::CaseInsensitive);
 
        if (auto_) {
-          config.block_number = (ui->inputfilas->text().toInt()+ui->inputcol->text().toInt()) /
-                  ui->inputobs->text().remove(QChar('%'), Qt::CaseInsensitive).toInt();
+          config.block_number = config.block_number = (ui->inputfilas->text().toFloat()*ui->inputcol->text().toFloat()) *
+                  (ui->inputobs->text().remove(QChar('%'), Qt::CaseInsensitive).toFloat()/100);
           qDebug() << config.block_number;
        } else {
           config.block_number = ui->inputobs->text().toInt();
        }
 
-       SmartCarWindow* smart_car_window = new SmartCarWindow(config);
+       SmartCarWindow* smart_car_window = new SmartCarWindow(config, auto_);
        smart_car_window->show();
 
        this->close();

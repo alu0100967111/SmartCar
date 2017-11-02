@@ -19,9 +19,8 @@ class SmartCarWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit SmartCarWindow(const struct params &config, QWidget *parent = 0);
+    explicit SmartCarWindow(const struct params &config, const bool &auto_, QWidget *parent = 0);
     ~SmartCarWindow();
-
 
 private:
     Ui::SmartCarWindow *ui;
@@ -35,6 +34,7 @@ protected:
 
 public slots:
     int b1_clicked();
+    bool auto_;
 };
 
 #endif // SMARTCARWINDOW_H

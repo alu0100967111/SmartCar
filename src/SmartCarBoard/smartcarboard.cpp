@@ -1,12 +1,13 @@
 #include "smartcarboard.h"
 
-SmartCarBoard::SmartCarBoard(const struct params &config,const struct size_struct &frame_size):
+SmartCarBoard::SmartCarBoard(const struct params &config, const struct size_struct &frame_size, const bool &auto_):
     row_number_(config.row_number),
     column_number_(config.col_number),
     distance_algorithm_(config.distance_algorithm),
     car_position_(-1,-1),
     goal_position_(-1,-1),
     obstacle_positions_(),
+    auto_(auto_),
     block_number_(config.block_number)
 {
     // Inicializamos Tablero
@@ -16,6 +17,21 @@ SmartCarBoard::SmartCarBoard(const struct params &config,const struct size_struc
             label_row.push_back(new SmartCarBoardCell(this, frame_size, i, j));
         }
         smart_car_board_.push_back(label_row);
+    }
+
+    //Si está en automático, metemos los obstáculos
+    if(auto_){
+
+        QTime time = QTime::currentTime();
+        qsrand((uint)time.msec());
+        for(; block_number_ > 0; block_number_--){
+            int x = qrand() % (row_number_-1);
+            int y = qrand() % (column_number_-1);
+            qDebug() << "It's an automated block" << x << " " << y;
+            obstacle_positions_.insert(Position(x, y));
+            smart_car_board_[x][y] -> set_obstacle();
+
+        }
     }
 }
 

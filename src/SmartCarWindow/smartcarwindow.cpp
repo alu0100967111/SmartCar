@@ -8,8 +8,12 @@
 #include "Common/error.h"
 #include "smartcarwindow.h"
 #include "ui_smartcarwindow.h"
+#include <QMainWindow>
+#include <QGridLayout>
+#include <QApplication> // Para coger tamaño pantalla
+#include <QDesktopWidget> // Para coger tamaño pantalla
 
-SmartCarWindow::SmartCarWindow(const struct params &config, QWidget *parent) :
+SmartCarWindow::SmartCarWindow(const struct params &config, const bool &auto_, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::SmartCarWindow),
     smart_car_layout(new QGridLayout)
@@ -20,7 +24,7 @@ SmartCarWindow::SmartCarWindow(const struct params &config, QWidget *parent) :
 
     InicializeWindow(config, frame_size);
 
-    smart_car_board = new SmartCarBoard(config, frame_size); // Configuro el tablero segun config.
+    smart_car_board = new SmartCarBoard(config, frame_size, auto_); // Configuro el tablero segun config.
     InicializeLayout(config.row_number,config.col_number);
 
     ui->SmartCarWidget->setLayout(smart_car_layout);
