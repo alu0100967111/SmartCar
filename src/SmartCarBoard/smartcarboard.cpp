@@ -56,15 +56,24 @@ void SmartCarBoard::slot_cell_clicked(int x_pos, int y_pos)
         smart_car_board_[x_pos][y_pos] -> set_obstacle();
         qApp->processEvents(); // Proceso eventos
     }
-    if (block_number_ == 0) {
+    if (block_number_ == 0){
         QThread::sleep(2);
-        Path path = AStar_Algorithm();
-        for ( auto x : path ) {
-            std::cout << " { " << x.first << "," << x.second << " } ";
-        }
+        Path path;
+        QTime time;
+
+        time.start();
+
+        path = AStar_Algorithm();
+
+        std::cout << "Tiempo de ejecucion " << time.elapsed() << " ms\n";
+
         if (path.size() == 0 ) {
             criticalerror("ERROR", "No hay camino");
         }
+
+        for ( auto x : path ) { std::cout << " { " << x.first << "," << x.second << " } ";}
+        //SHOW STADISTICS
+        exit(1); // TODO: ¿Queremos esto?
     }
 }
 

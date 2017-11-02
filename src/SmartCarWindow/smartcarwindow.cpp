@@ -12,6 +12,7 @@
 #include <QGridLayout>
 #include <QApplication> // Para coger tamaño pantalla
 #include <QDesktopWidget> // Para coger tamaño pantalla
+#include <Qt>
 
 SmartCarWindow::SmartCarWindow(const struct params &config, const bool &auto_, QWidget *parent) :
     QMainWindow(parent),

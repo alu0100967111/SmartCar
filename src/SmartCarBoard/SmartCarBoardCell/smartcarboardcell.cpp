@@ -20,6 +20,7 @@ SmartCarBoardCell::SmartCarBoardCell(SmartCarBoard* smart_car_board_in, const st
     this -> setMaximumSize(frame_size.height,frame_size.width);
 
     connect(this, SIGNAL (cell_clicked()), this, SLOT (slot_cell_clicked()));
+
 }
 
 SmartCarBoardCell::SmartCarBoardCell(const SmartCarBoardCell& cell)
