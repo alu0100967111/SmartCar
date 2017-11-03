@@ -26,12 +26,19 @@ SmartCarBoard::SmartCarBoard(const struct params &config, const struct size_stru
         //Inicializar qsrand para valores aleatorios
         QTime time = QTime::currentTime();
         qsrand((uint)time.msec());
+
         //Mientras queden bloques pendientes de poner, seguir intentando
         for(; block_number_ > 0; block_number_--){
             int x = qrand() % (row_number_);
             int y = qrand() % (column_number_);
             qDebug() << "It's an automated block" << x << " " << y;
-/*!*********¿Si en esa posición ya hay un obstáculo?*/
+
+            // ¿Si en esa posición ya hay un obstáculo?
+            while (obstacle_positions_.count(Position(x, y)) != 0) {
+               x = qrand() % (row_number_);
+               y = qrand() % (column_number_);
+            }
+
             obstacle_positions_.insert(Position(x, y));
             smart_car_board_[x][y] -> set_obstacle();
         }
