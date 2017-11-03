@@ -15,6 +15,7 @@ src/SmartCar.pro.user
 # QtCreator
 
 src/*.autosave
+src/*/*.autosave
 
 # QtCtreator Qml
 src/*.qmlproject.user

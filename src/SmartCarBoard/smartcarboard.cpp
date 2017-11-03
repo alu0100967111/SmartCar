@@ -122,6 +122,7 @@ Path SmartCarBoard::AStar_Algorithm()
         if (x_pos+i < 0 || x_pos+i >= row_number_ || y_pos+j < 0 || y_pos+j >= column_number_) continue;
 
         AStarCell& neighbour_cell = board[x_pos+i][y_pos+j];
+
         if (neighbour_cell.obstacle_) continue;
 
         // Si NO está en la lista roja
@@ -129,7 +130,7 @@ Path SmartCarBoard::AStar_Algorithm()
 
           // Si es mayor no es un camino mejor. ¡Al inicial siempre es mejor! (MAX_INT)
           // AStarCell *aux = board[x_pos][y_pos].get_father();
-          // Guardar el antiguo padre de la cas
+          // Guardar el antiguo padre de la variable auxiliar
           AStarCell *aux = neighbour_cell.get_father();
 
           //Probar distancia desde la casilla roja
@@ -157,7 +158,7 @@ Path SmartCarBoard::AStar_Algorithm()
         }
       }
     }
-    QThread::msleep(200);
+    QThread::msleep(20);
   }
   return {};
 }
@@ -191,21 +192,39 @@ AStarBoard SmartCarBoard::InitializeBoardAStar()
 
 int SmartCarBoard::AStarDistance(AStarCell& current_cell)
 {
-    AStarCell* current_cell_copy = &current_cell;
+    AStarCell* current = &current_cell;
+    AStarCell* father = current->get_father();
 
-    int distance = 0 /*count= 0*/;
 
-    while (!(current_cell_copy->start_) /*&& (count < 10)*/) {
-      //count ++;
-      distance += 10;
-      current_cell_copy = current_cell_copy -> get_father();
+    int distance = 0;
+    int dif = 0; //Diferencia entre una celda y otra
+
+    while (!(current->start_)) {
+        father = current->get_father();
+    //Está diagonal: entonces cambian las dos coordenadas
+    //Está recto: entonces solo cambia una de las coordenadas
+    //(4,5)-(5,5) casilla a la derecha: abs(4-5)+abs(5-5) = 1
+    //(4,5)-(5,6) casilla abajo a la derecha: abs(4-5)+abs(5-6) = 2
+      dif = abs(father->get_x_pos() - current->get_x_pos())
+              + abs(father->get_y_pos() - current->get_y_pos());
+      if (dif == 1)
+          distance += 10; //raíz(10²+10²)
+      else if (dif == 2)
+          distance += 11;
+      else {
+          qDebug() << "Lo estas haciendo mal" << endl;
+          distance+=10;
+      }
+
+
+      current = father;
     }
 
     return distance;
 }
 
 double SmartCarBoard::AStarEstimateCost(AStarCell& neighbour_cell, AStarCell& goal)
-{
+{    
     int x_distance = (goal.get_x_pos() - neighbour_cell.get_x_pos())*10;
     int y_distance = (goal.get_y_pos() - neighbour_cell.get_y_pos())*10;
     double distance = 0;

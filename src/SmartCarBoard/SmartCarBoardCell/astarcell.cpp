@@ -13,7 +13,15 @@ AStarCell::AStarCell(int x_pos, int y_pos, int f_score, int g_score, int h_score
 
 AStarCell::AStarCell(const AStarCell &cell)
 {
-    *this = cell;
+    x_pos_ = cell.x_pos_;
+    y_pos_ = cell.y_pos_;
+    f_score_ = cell.f_score_;
+    g_score_ = cell.g_score_;
+    h_score_ = cell.h_score_;
+    start_ = cell.start_;
+    goal_ = cell.goal_;
+    obstacle_ = cell.obstacle_;
+    father_ = cell.father_;
 }
 
 AStarCell::~AStarCell(){}
