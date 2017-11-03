@@ -59,6 +59,8 @@ private:
 public:
     QVector<QVector<SmartCarBoardCell*> > smart_car_board_;
     Path AStar_Algorithm();
+    //Para el boton start
+    void set_block_number(const int);
 
 private:
 
@@ -66,6 +68,7 @@ private:
     int AStarDistance(AStarCell &current_cell);
     double AStarEstimateCost(AStarCell& neighbour_cell, AStarCell& goal);
     Path AStarReconstructPath(AStarCell* current_cell);
+
 };
 
 #endif // SMARTCARBOARD_H

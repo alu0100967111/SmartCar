@@ -131,6 +131,8 @@ int SmartCarWindow::start_clicked(){
     disconnect(ui->start, 0, 0, 0);
     qDebug() << "Botón start desactivado" << endl;
 
+    //No se pueden introducir más obstaculos
+    smart_car_board->set_block_number(0);
     //Comenzar algoritmo A*
     QThread::sleep(2);
     Path path;
