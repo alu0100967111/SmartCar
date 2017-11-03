@@ -81,16 +81,6 @@ void SmartCarBoard::slot_cell_clicked(int x_pos, int y_pos)
         block_number_--;
         smart_car_board_[x_pos][y_pos] -> set_obstacle();
     }
-
-    if (car_position_ != Position(-1,-1) && goal_position_ != Position(-1,-1) && block_number_ == 0) {
-        QThread::sleep(2);
-        Path path;
-        QTime time;
-
-        time.start();
-
-        path = AStar_Algorithm();
-    }
     qApp->processEvents(); // Proceso eventos
 }
 
@@ -255,4 +245,10 @@ Path SmartCarBoard::AStarReconstructPath(AStarCell* current_cell)
 //Para el boton start
 void SmartCarBoard::set_block_number(const int n){
     block_number_ = n;
+}
+
+bool SmartCarBoard::checkStart()
+{
+    if (car_position_ != Position(-1,-1) && goal_position_ != Position(-1,-1)) { return false; }
+    return true;
 }

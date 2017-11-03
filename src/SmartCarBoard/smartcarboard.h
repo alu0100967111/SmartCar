@@ -61,6 +61,7 @@ public:
     Path AStar_Algorithm();
     //Para el boton start
     void set_block_number(const int);
+    bool checkStart();
 
 private:
 
