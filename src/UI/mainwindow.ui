@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>553</width>
-    <height>335</height>
+    <width>546</width>
+    <height>375</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -41,7 +41,7 @@
             </size>
            </property>
            <property name="text">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Bienvenido al simulador de coche autónomo&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt;  font-family: Lato;&quot;&gt;Bienvenido al simulador de coche autónomo&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
          </item>
@@ -59,7 +59,7 @@
            <x>10</x>
            <y>20</y>
            <width>511</width>
-           <height>101</height>
+           <height>133</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -163,6 +163,54 @@
               </item>
              </layout>
             </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_9">
+              <item>
+               <spacer name="verticalSpacer_5">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>Algoritmo Heurística</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="heuristicOption">
+                <item>
+                 <property name="text">
+                  <string>Sin Heurística</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Heurística Euclídea</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Heurística Manhattan</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Heurística Chebyshev</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </item>
            </layout>
           </item>
           <item>
@@ -203,8 +251,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>553</width>
-     <height>19</height>
+     <width>546</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHola">

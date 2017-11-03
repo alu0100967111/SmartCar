@@ -34,8 +34,9 @@ protected:
     bool auto_;
 
 public slots:
-    int ok_clicked();
     int start_clicked();
+    int restart_clicked();
+    int exit_clicked();
 
 };
 

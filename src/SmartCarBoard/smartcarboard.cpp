@@ -2,7 +2,8 @@
 
 //CONSTRUCTOR: Crea una matriz de <SmartCarBoardCell> en smart_car_board_
 //Si se ha seleccionado obstáculos automáticos, también los introduce
-SmartCarBoard::SmartCarBoard(const struct params &config, const struct size_struct &frame_size, const bool &auto_):
+SmartCarBoard::SmartCarBoard(const struct params &config, const struct size_struct &frame_size, const bool &auto_,
+                             Ui::SmartCarWindow &smart_car_window_ui):
     row_number_(config.row_number),
     column_number_(config.col_number),
     distance_algorithm_(config.distance_algorithm),
@@ -10,7 +11,8 @@ SmartCarBoard::SmartCarBoard(const struct params &config, const struct size_stru
     goal_position_(-1,-1),
     obstacle_positions_(),
     auto_(auto_),
-    block_number_(config.block_number)
+    block_number_(config.block_number),
+    smart_car_window_ui_(&smart_car_window_ui)
 {
     // Inicializamos Tablero
     for (int i = 0; i < row_number_; ++i) { //Para cada fila
@@ -46,7 +48,7 @@ SmartCarBoard::SmartCarBoard(const struct params &config, const struct size_stru
     }
 
     // Mostrar mensaje de elegir coche
-    informationerror("PASO 1", "Posicionar coche.");
+    smart_car_window_ui_ -> start -> setText("PASO 1: Posicionar coche.");
 }
 
 SmartCarBoard::~SmartCarBoard() {}
@@ -59,7 +61,7 @@ void SmartCarBoard::slot_cell_clicked(int x_pos, int y_pos)
         smart_car_board_[x_pos][y_pos] -> set_car();
 
         // Mostrar mensaje de elegir meta
-        informationerror("PASO 2", "Posicionar meta.");
+        smart_car_window_ui_ -> start -> setText("PASO 2: Posicionar meta.");
     }
     else if (goal_position_ == Position(-1, -1)) {
         qDebug() << "It's the goal";
@@ -72,7 +74,11 @@ void SmartCarBoard::slot_cell_clicked(int x_pos, int y_pos)
           smart_car_board_[x_pos][y_pos] -> set_goal();
         }
         if (block_number_ != 0) {
-            informationerror("PASO 3", "Posicionar obstáculos.");
+            // Mostrar mensaje de elegir meta
+            smart_car_window_ui_ -> start -> setText("PASO 3: Posicionar obstáculos.");
+        }
+        else {
+            smart_car_window_ui_ -> start -> setText("¡Presione aquí para empezar!");
         }
     }
     else if (block_number_ > 0 ) { // Si es un bloque, que sea menor que numero de bloques
@@ -199,6 +205,9 @@ double SmartCarBoard::AStarEstimateCost(AStarCell& neighbour_cell, AStarCell& go
     double distance = 0;
 
     switch (distance_algorithm_) {
+      case 0: // No Heuristic
+        distance = 0;
+        break;
       case 1: // Euclidian Distance
         distance = (int)sqrt((x_distance * x_distance) + (y_distance * y_distance)) + 0.5;
         break;

@@ -21,21 +21,25 @@ SmartCarWindow::SmartCarWindow(const struct params &config, const bool &auto_, Q
 {
     // Configura la ventana ANTES
     ui->setupUi(this);
+
     //Tamaño de cada frame en grid (ajuste maximo)
     size_struct frame_size = GetFrameSize(config);
+
     //Bloquea redimensionamiento y añade márgenes
     InicializeWindow(config, frame_size);
+
     // Configuro el tablero segun config.
-    smart_car_board = new SmartCarBoard(config, frame_size, auto_);
-    //Añade SmartCarBoardCell's en SmartCarBoard::smart_car_layout (QGridLayout)
-    //smart_car_layout->addWidget(smart_car_board->smart_car_board_[i][j],i,j); // TODO: Poner privado...
+    smart_car_board = new SmartCarBoard(config, frame_size, auto_, *ui);
+
     InicializeLayout(config.row_number,config.col_number);
 
-/*!*Inicializa SmartCarWidget con el Layout de SmartCarBoard::smart_car_layout*/
+    //Inicializa SmartCarWidget con el Layout de SmartCarBoard::smart_car_layout
     ui->SmartCarWidget->setLayout(smart_car_layout);
 
-    connect(ui->ok, SIGNAL(clicked()), this, SLOT(ok_clicked()));
     connect(ui->start, SIGNAL(clicked()), this, SLOT(start_clicked()));
+    connect(ui->restart, SIGNAL(clicked()), this, SLOT(restart_clicked()));
+    connect(ui->exit, SIGNAL(clicked()), this, SLOT(exit_clicked()));
+
 }
 
 SmartCarWindow::~SmartCarWindow()
@@ -61,13 +65,15 @@ void SmartCarWindow::InicializeWindow(const struct params &config, const struct 
     QRect screen = QApplication::desktop() -> screenGeometry();
     int screen_height = screen.height(), screen_width = screen.width(); // Tamaños de pantalla ya ajustados.
 
-            // 2.2 Calculamos los margenes arriba/abajo & izquierda/derecha.
+            // 2.2 Ajusto espacio de buttonsBar
+    ui -> buttonsBar -> setSpacing((screen_width - 450) / 2 );
+
+            // 2.3 Calculamos los margenes arriba/abajo & izquierda/derecha.
     int top_bottom_margin = ( (screen_height - (frame_size.height * config.row_number)) / 2 );
     int left_right_margin = ( (screen_width - (frame_size.width * config.col_number)) / 2 );
 
-            // 2.3 Añadimos los márgenes.
+            // 2.4 Añadimos los márgenes.
     this -> smart_car_layout -> setContentsMargins(left_right_margin, top_bottom_margin, left_right_margin, top_bottom_margin);
-
 }
 
 void SmartCarWindow::InicializeLayout(const int row, const int column)
@@ -118,17 +124,11 @@ struct size_struct SmartCarWindow::GetFrameSize(const struct params &config)
     return { frame_width, frame_height };
 }
 
-int SmartCarWindow::ok_clicked(){
-
-    MainWindow* main_window = new MainWindow;
-    main_window->show();
-
-    this->close();
-
-}
-
-int SmartCarWindow::start_clicked(){
+int SmartCarWindow::start_clicked()
+{
     if (smart_car_board -> checkStart()) { return 1; }
+
+    ui -> start -> setText("INICIANDO ASTAR");
 
     disconnect(ui->start, 0, 0, 0);
     qDebug() << "Botón start desactivado" << endl;
@@ -151,5 +151,21 @@ int SmartCarWindow::start_clicked(){
     }
 
     for ( auto x : path ) { std::cout << " { " << x.first << "," << x.second << " } ";}
-    //SHOW STADISTICS
+
+    ui -> start -> setText("¡ASTAR FINALIZADO!");
+}
+
+int SmartCarWindow::restart_clicked()
+{
+
+    MainWindow* main_window = new MainWindow;
+    main_window->show();
+
+    this->close();
+
+}
+
+int SmartCarWindow::exit_clicked()
+{
+    this->close();
 }

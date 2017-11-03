@@ -16,6 +16,8 @@
 
 #include <SmartCarBoard/SmartCarBoardCell/astarcell.h>
 #include "SmartCarBoard/SmartCarBoardCell/smartcarboardcell.h"
+#include "SmartCarWindow/smartcarwindow.h"
+#include <ui_smartcarwindow.h>
 #include "Common/error.h"
 
 using Position = std::pair<int, int>;
@@ -39,7 +41,8 @@ struct size_struct {
 class SmartCarBoard
 {
 public:
-    SmartCarBoard(const struct params &config, const struct size_struct &frame_size, const bool &auto_);
+    SmartCarBoard(const struct params &config, const struct size_struct &frame_size, const bool &auto_,
+                  Ui::SmartCarWindow &smart_car_window_ui);
     ~SmartCarBoard();
 
 public slots:
@@ -51,6 +54,7 @@ private:
     int block_number_;
     int distance_algorithm_;
     bool auto_;
+    Ui::SmartCarWindow *smart_car_window_ui_;
 
     Position car_position_;
     Position goal_position_;

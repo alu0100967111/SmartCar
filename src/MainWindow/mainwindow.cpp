@@ -53,7 +53,7 @@ bool MainWindow::on_simular_clicked()
        config.row_number = ui->inputfilas->text().toInt();
        config.col_number = ui->inputcol->text().toInt();
        config.block_number = ui->inputobs->text().toInt();
-       config.distance_algorithm = 1; //TEMP
+       config.distance_algorithm = ui -> heuristicOption -> currentIndex(); // Elegimos algoritmo Heurística
 
        qDebug() << ui->inputobs->text().remove(QChar('%'), Qt::CaseInsensitive);
 
