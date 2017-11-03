@@ -25,14 +25,17 @@ SmartCarBoard::SmartCarBoard(const struct params &config, const struct size_stru
         QTime time = QTime::currentTime();
         qsrand((uint)time.msec());
         for(; block_number_ > 0; block_number_--){
-            int x = qrand() % (row_number_-1);
-            int y = qrand() % (column_number_-1);
+            int x = qrand() % (row_number_);
+            int y = qrand() % (column_number_);
             qDebug() << "It's an automated block" << x << " " << y;
             obstacle_positions_.insert(Position(x, y));
             smart_car_board_[x][y] -> set_obstacle();
         }
         block_number_ = 0;
     }
+
+    // Mostrar mensaje de elegir coche
+    informationerror("PASO 1", "Posicionar coche.");
 }
 
 SmartCarBoard::~SmartCarBoard() {}
@@ -43,11 +46,18 @@ void SmartCarBoard::slot_cell_clicked(int x_pos, int y_pos)
         qDebug() << "It's the car";
         car_position_ = Position(x_pos, y_pos);
         smart_car_board_[x_pos][y_pos] -> set_car();
+
+        // Mostrar mensaje de elegir meta
+        informationerror("PASO 2", "Posicionar meta.");
     }
     else if (goal_position_ == Position(-1, -1)) {
         qDebug() << "It's the goal";
         goal_position_ = Position(x_pos, y_pos);
         smart_car_board_[x_pos][y_pos] -> set_goal();
+
+        if (block_number_ != 0) {
+            informationerror("PASO 3", "Posicionar obstáculos.");
+        }
     }
     else if (block_number_ > 0 ) { // Si es un bloque, que sea menor que numero de bloques
         qDebug() << "It's a block";
@@ -56,7 +66,7 @@ void SmartCarBoard::slot_cell_clicked(int x_pos, int y_pos)
         smart_car_board_[x_pos][y_pos] -> set_obstacle();
         qApp->processEvents(); // Proceso eventos
     }
-    else if (block_number_ == 0){
+    if (car_position_ != Position(-1,-1) && goal_position_ != Position(-1,-1) && block_number_ == 0) {
         QThread::sleep(2);
         Path path;
         QTime time;
@@ -93,6 +103,7 @@ Path SmartCarBoard::AStar_Algorithm()
     int y_pos = current_cell.get_y_pos();
 
     closed_set.insert(current_cell);
+
     smart_car_board_[x_pos][y_pos] -> PaintCell("background-color:red;"); qApp->processEvents();
 
     open_set.erase(open_set.begin());
@@ -215,20 +226,20 @@ Path SmartCarBoard::AStarReconstructPath(AStarCell* current_cell)
        Position path_position = current_cell -> get_pos();
        total_path.push_back(path_position);
 
-       //Lo dibujamos
-       if (total_path.size() != 1) {
-           smart_car_board_[path_position.first][path_position.second] -> setStyleSheet("background-color:yellow;");
-       }
-
        current_cell = current_cell -> get_father();
+
+       //Lo dibujamos
+       if (total_path.size() != 1 && current_cell != NULL) {
+           smart_car_board_[path_position.first][path_position.second] -> PaintCell("background-color:yellow;");
+       }
     }
 
     for (int i = total_path.size()-1; i == 0 ; i--) {
-        QThread::msleep(5000);
-        smart_car_board_[car_position_.first][car_position_.second] -> setPixmap(QPixmap("../photos/empty.png"));
+        QThread::msleep(200);
+        smart_car_board_[car_position_.first][car_position_.second] -> PaintCell("background-color:yellow;");
         car_position_ = total_path[i];
-        smart_car_board_[total_path[i].first][total_path[i].second] -> setPixmap(QPixmap("../photos/car.png"));
+        smart_car_board_[car_position_.first][car_position_.second] -> setPixmap(QPixmap("../photos/car.png"));
+        qApp->processEvents();
     }
-
     return total_path;
 }
