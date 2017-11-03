@@ -19,18 +19,23 @@ SmartCarWindow::SmartCarWindow(const struct params &config, const bool &auto_, Q
     ui(new Ui::SmartCarWindow),
     smart_car_layout(new QGridLayout)
 {
-    ui->setupUi(this); // Configura la ventana ANTES
-
+    // Configura la ventana ANTES
+    ui->setupUi(this);
+    //Tamaño de cada frame en grid (ajuste maximo)
     size_struct frame_size = GetFrameSize(config);
-
+    //Bloquea redimensionamiento y añade márgenes
     InicializeWindow(config, frame_size);
-
-    smart_car_board = new SmartCarBoard(config, frame_size, auto_); // Configuro el tablero segun config.
+    // Configuro el tablero segun config.
+    smart_car_board = new SmartCarBoard(config, frame_size, auto_);
+    //Añade SmartCarBoardCell's en SmartCarBoard::smart_car_layout (QGridLayout)
+    //smart_car_layout->addWidget(smart_car_board->smart_car_board_[i][j],i,j); // TODO: Poner privado...
     InicializeLayout(config.row_number,config.col_number);
 
+/*!*Inicializa SmartCarWidget con el Layout de SmartCarBoard::smart_car_layout*/
     ui->SmartCarWidget->setLayout(smart_car_layout);
 
-    connect(ui->b1, SIGNAL(clicked()), this, SLOT(b1_clicked()));
+    connect(ui->ok, SIGNAL(clicked()), this, SLOT(ok_clicked()));
+    connect(ui->start, SIGNAL(clicked()), this, SLOT(start_clicked()));
 }
 
 SmartCarWindow::~SmartCarWindow()
@@ -69,6 +74,8 @@ void SmartCarWindow::InicializeLayout(const int row, const int column)
 {
     for (int i = 0; i < row; ++i) {
         for (int j = 0; j < column; ++j) {
+            //QGridLayout::addWidget(QWidget*, int row, int column)
+            //Añade el widget de tipo SmartCarBoardCell en la posicion (i,j)
             smart_car_layout->addWidget(smart_car_board->smart_car_board_[i][j],i,j); // TODO: Poner privado...
         }
     }
@@ -111,11 +118,34 @@ struct size_struct SmartCarWindow::GetFrameSize(const struct params &config)
     return { frame_width, frame_height };
 }
 
-int SmartCarWindow::b1_clicked(){
+int SmartCarWindow::ok_clicked(){
 
     MainWindow* main_window = new MainWindow;
     main_window->show();
 
     this->close();
 
+}
+
+int SmartCarWindow::start_clicked(){
+    disconnect(ui->start, 0, 0, 0);
+    qDebug() << "Botón start desactivado" << endl;
+
+    //Comenzar algoritmo A*
+    QThread::sleep(2);
+    Path path;
+    QTime time;
+
+    time.start();
+
+    path = smart_car_board->AStar_Algorithm();
+
+    std::cout << "Tiempo de ejecucion " << time.elapsed() << " ms\n";
+
+    if (path.size() == 0 ) {
+        criticalerror("ERROR", "No hay camino");
+    }
+
+    for ( auto x : path ) { std::cout << " { " << x.first << "," << x.second << " } ";}
+    //SHOW STADISTICS
 }
