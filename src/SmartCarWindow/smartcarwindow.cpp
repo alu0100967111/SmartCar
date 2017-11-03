@@ -124,8 +124,7 @@ struct size_struct SmartCarWindow::GetFrameSize(const struct params &config)
     return { frame_width, frame_height };
 }
 
-int SmartCarWindow::start_clicked()
-{
+int SmartCarWindow::start_clicked(){
     if (smart_car_board -> checkStart()) { return 1; }
 
     ui -> start -> setText("INICIANDO ASTAR");
@@ -157,12 +156,10 @@ int SmartCarWindow::start_clicked()
 
 int SmartCarWindow::restart_clicked()
 {
-
     MainWindow* main_window = new MainWindow;
     main_window->show();
 
     this->close();
-
 }
 
 int SmartCarWindow::exit_clicked()
