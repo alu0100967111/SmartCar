@@ -18,11 +18,11 @@
 #include "SmartCarBoard/SmartCarBoardCell/smartcarboardcell.h"
 #include "Common/error.h"
 
-using Position = std::pair<int, int>;
-using Path = std::vector<Position>;
-using AStarSet = std::set<AStarCell>; // SET PARA OPEN Y CLOSED
-using AStarVector = std::vector<AStarCell>;
-using AStarBoard = std::vector<AStarVector>; // TABLERO (VECTOR)
+using Position = std::pair<int, int>;   //PAREJA DE COORDENADAS
+using Path = std::vector<Position>;     //VECTOR DE COORDENADAS
+using AStarSet = std::set<AStarCell>;   //SET DE ASTARCELL
+using AStarVector = std::vector<AStarCell>;     //VECTOR DE ASTARCELL
+using AStarBoard = std::vector<AStarVector>;    //VECTOR DE VECTORES DE ASTARCELL
 
 struct params {
     int row_number;

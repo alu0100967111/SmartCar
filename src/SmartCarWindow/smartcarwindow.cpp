@@ -144,12 +144,14 @@ int SmartCarWindow::start_clicked(){
 
     path = smart_car_board->AStar_Algorithm();
 
-    std::cout << "Tiempo de ejecucion " << time.elapsed() << " ms\n";
+    qDebug() << "Tiempo de ejecucion " << time.elapsed() << " ms\n";
 
     if (path.size() == 0 ) {
         criticalerror("ERROR", "No hay camino");
     }
 
-    for ( auto x : path ) { std::cout << " { " << x.first << "," << x.second << " } ";}
+    for ( auto x : path )
+        qDebug() << "[" << x.first << ", " << x.second << " ]";
+
     //SHOW STADISTICS
 }
