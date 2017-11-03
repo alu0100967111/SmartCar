@@ -10,6 +10,7 @@ src/*.pro.user.*
 src/*.qbs.user
 src/*.qbs.user.*
 build-*/
+src/SmartCar.pro.user
 
 # QtCreator
 
