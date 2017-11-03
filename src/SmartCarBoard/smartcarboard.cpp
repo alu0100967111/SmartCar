@@ -3,6 +3,7 @@
 SmartCarBoard::SmartCarBoard(const struct params &config,const struct size_struct &frame_size):
     row_number_(config.row_number),
     column_number_(config.col_number),
+    distance_algorithm_(config.distance_algorithm),
     car_position_(-1,-1),
     goal_position_(-1,-1),
     obstacle_positions_(),
@@ -34,21 +35,19 @@ void SmartCarBoard::slot_cell_clicked(int x_pos, int y_pos)
     }
     else if (block_number_ > 0 ) { // Si es un bloque, que sea menor que numero de bloques
         qDebug() << "It's a block";
-        Path path;
-        obstacle_positions_.insert(Position(x_pos, y_pos)); block_number_--;
-
+        obstacle_positions_.insert(Position(x_pos, y_pos));
+        block_number_--;
         smart_car_board_[x_pos][y_pos] -> set_obstacle();
         qApp->processEvents(); // Proceso eventos
-
-        if (block_number_ == 0) {
-            //QThread::sleep(2);
-            path = AStar_Algorithm();
-            for ( auto x : path ) {
-                std::cout << " { " << x.first << "," << x.second << " } ";
-            }
-            if (path.size() == 0 ) {
-                criticalerror("ERROR", "No hay camino");
-            }
+    }
+    if (block_number_ == 0) {
+        QThread::sleep(2);
+        Path path = AStar_Algorithm();
+        for ( auto x : path ) {
+            std::cout << " { " << x.first << "," << x.second << " } ";
+        }
+        if (path.size() == 0 ) {
+            criticalerror("ERROR", "No hay camino");
         }
     }
 }
@@ -103,7 +102,6 @@ Path SmartCarBoard::AStar_Algorithm()
           }
 
           //  Inserto la celda cambiada! Si ya estaba esa posicion la elimino
-
           AStarSet open_set_copy = open_set;
           for (auto cell: open_set) { //TODO: ¿Se podria cambiar este for modificacando el operador < de celda?
             if (cell.get_pos() == neighbour_cell.get_pos())
@@ -115,7 +113,7 @@ Path SmartCarBoard::AStar_Algorithm()
         }
       }
     }
-    //QThread::msleep(200);
+    QThread::msleep(200);
   }
   return {};
 }
@@ -165,15 +163,22 @@ double SmartCarBoard::AStarEstimateCost(AStarCell& neighbour_cell, AStarCell& go
 {
     int x_distance = (goal.get_x_pos() - neighbour_cell.get_x_pos())*10;
     int y_distance = (goal.get_y_pos() - neighbour_cell.get_y_pos())*10;
+    double distance = 0;
 
-    // Euclidian Distance
-    double distance = (int)sqrt((x_distance * x_distance) + (y_distance * y_distance)) + 0.5;
-
-    // Manhattan distance
-    //distance = abs(x_distance) + abs(y_distance);
-
-    // Chebyshev distance
-    //distance  =max(abs(x_distance), abs(y_distance));
+    switch (distance_algorithm_) {
+      case 1: // Euclidian Distance
+        distance = (int)sqrt((x_distance * x_distance) + (y_distance * y_distance)) + 0.5;
+        break;
+      case 2: // Manhattan distance
+        distance = abs(x_distance) + abs(y_distance);
+        break;
+      case 3: // Chebyshev distance
+        distance = std::max(abs(x_distance), abs(y_distance));
+        break;
+      default:
+        criticalerror("ERROR", "ERROR FATAL DISTANCIA");
+        break;
+    }
 
     return distance;
 }
@@ -184,7 +189,6 @@ Path SmartCarBoard::AStarReconstructPath(AStarCell* current_cell)
 
     while (current_cell != NULL) {
        Position path_position = current_cell -> get_pos();
-
        total_path.push_back(path_position);
 
        //Lo dibujamos
@@ -196,13 +200,11 @@ Path SmartCarBoard::AStarReconstructPath(AStarCell* current_cell)
     }
 
     for (int i = total_path.size()-1; i == 0 ; i--) {
+        QThread::msleep(5000);
         smart_car_board_[car_position_.first][car_position_.second] -> setPixmap(QPixmap("../photos/empty.png"));
         car_position_ = total_path[i];
         smart_car_board_[total_path[i].first][total_path[i].second] -> setPixmap(QPixmap("../photos/car.png"));
     }
-
-    slot_cell_clicked(0,1);
-    //QThread::msleep(5000);
 
     return total_path;
 }

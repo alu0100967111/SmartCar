@@ -42,7 +42,8 @@ bool MainWindow::on_simular_clicked()
             config.row_number = ui->inputfilas->text().toInt();
             config.col_number = ui->inputcol->text().toInt();
             config.block_number = ui->inputobs->text().toInt();
-
+            //TEMP
+            config.distance_algorithm = 1;
 
             SmartCarWindow* smart_car_window = new SmartCarWindow(config);
             smart_car_window->show();

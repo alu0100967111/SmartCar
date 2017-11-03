@@ -27,6 +27,7 @@ struct params {
     int row_number;
     int col_number;
     int block_number;
+    int distance_algorithm;
 };
 
 struct size_struct {
@@ -47,6 +48,7 @@ private:
     int row_number_;
     int column_number_;
     int block_number_;
+    int distance_algorithm_;
 
     Position car_position_;
     Position goal_position_;

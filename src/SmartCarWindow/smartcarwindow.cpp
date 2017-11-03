@@ -6,7 +6,6 @@
 #include "SmartCarBoard/smartcarboard.h"
 #include "MainWindow/mainwindow.h"
 #include "Common/error.h"
-/////////////////////////////////////////////////////
 #include "smartcarwindow.h"
 #include "ui_smartcarwindow.h"
 
