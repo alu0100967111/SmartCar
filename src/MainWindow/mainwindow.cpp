@@ -3,7 +3,7 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    auto_(false),
+    auto_(true),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -57,11 +57,13 @@ bool MainWindow::on_simular_clicked()
 
        qDebug() << ui->inputobs->text().remove(QChar('%'), Qt::CaseInsensitive);
 
-       if (auto_) {
+       if (auto_) { //Aleatorio
+          /* n = filas m = columnas
+           * nBloques = (n*m)*porcentaje/100;*/
           config.block_number = (ui->inputfilas->text().toFloat()*ui->inputcol->text().toFloat()) *
                   (ui->inputobs->text().remove(QChar('%'), Qt::CaseInsensitive).toFloat()/100);
           qDebug() << config.block_number;
-       } else {
+       } else { //No aleatorio
           config.block_number = ui->inputobs->text().toInt();
        }
 

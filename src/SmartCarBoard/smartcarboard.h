@@ -58,9 +58,10 @@ private:
 
 public:
     QVector<QVector<SmartCarBoardCell*> > smart_car_board_;
+    Path AStar_Algorithm();
 
 private:
-    Path AStar_Algorithm();
+
     AStarBoard InitializeBoardAStar();
     int AStarDistance(AStarCell &current_cell);
     double AStarEstimateCost(AStarCell& neighbour_cell, AStarCell& goal);

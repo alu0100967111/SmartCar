@@ -1,5 +1,7 @@
 #include "smartcarboard.h"
 
+//CONSTRUCTOR: Crea una matriz de <SmartCarBoardCell> en smart_car_board_
+//Si se ha seleccionado obstáculos automáticos, también los introduce
 SmartCarBoard::SmartCarBoard(const struct params &config, const struct size_struct &frame_size, const bool &auto_):
     row_number_(config.row_number),
     column_number_(config.col_number),
@@ -11,9 +13,9 @@ SmartCarBoard::SmartCarBoard(const struct params &config, const struct size_stru
     block_number_(config.block_number)
 {
     // Inicializamos Tablero
-    for (int i = 0; i < row_number_; ++i) {
+    for (int i = 0; i < row_number_; ++i) { //Para cada fila
         QVector<SmartCarBoardCell*> label_row;
-        for (int j = 0; j < column_number_; ++j) {
+        for (int j = 0; j < column_number_; ++j) { //Añadir cada elemento de la columna
             label_row.push_back(new SmartCarBoardCell(this, frame_size, i, j));
         }
         smart_car_board_.push_back(label_row);
@@ -21,13 +23,15 @@ SmartCarBoard::SmartCarBoard(const struct params &config, const struct size_stru
 
     //Si está en automático, metemos los obstáculos
     if(auto_){
-
+        //Inicializar qsrand para valores aleatorios
         QTime time = QTime::currentTime();
         qsrand((uint)time.msec());
+        //Mientras queden bloques pendientes de poner, seguir intentando
         for(; block_number_ > 0; block_number_--){
             int x = qrand() % (row_number_-1);
             int y = qrand() % (column_number_-1);
             qDebug() << "It's an automated block" << x << " " << y;
+/*!*********¿Si en esa posición ya hay un obstáculo?*/
             obstacle_positions_.insert(Position(x, y));
             smart_car_board_[x][y] -> set_obstacle();
         }
@@ -56,24 +60,7 @@ void SmartCarBoard::slot_cell_clicked(int x_pos, int y_pos)
         smart_car_board_[x_pos][y_pos] -> set_obstacle();
         qApp->processEvents(); // Proceso eventos
     }
-    else if (block_number_ == 0){
-        QThread::sleep(2);
-        Path path;
-        QTime time;
 
-        time.start();
-
-        path = AStar_Algorithm();
-
-        std::cout << "Tiempo de ejecucion " << time.elapsed() << " ms\n";
-
-        if (path.size() == 0 ) {
-            criticalerror("ERROR", "No hay camino");
-        }
-
-        for ( auto x : path ) { std::cout << " { " << x.first << "," << x.second << " } ";}
-        //SHOW STADISTICS
-    }
 }
 
 Path SmartCarBoard::AStar_Algorithm()
