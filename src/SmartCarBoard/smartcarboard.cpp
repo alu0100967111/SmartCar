@@ -244,3 +244,8 @@ Path SmartCarBoard::AStarReconstructPath(AStarCell* current_cell)
     }
     return total_path;
 }
+
+//Para el boton start
+void SmartCarBoard::set_block_number(const int n){
+    block_number_ = n;
+}
