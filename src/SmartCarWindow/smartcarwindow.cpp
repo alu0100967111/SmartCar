@@ -101,6 +101,8 @@ struct size_struct SmartCarWindow::GetFrameSize(const struct params &config)
     }
     frame_width = frame_height;
 
+    qDebug() << "El tamaño del cuadrado es: " << frame_width << " x " << frame_height;
+
         // 4. Le paso los tamaños de los cuadrados finales al Tablero (SmartCarBoard).
     return { frame_width, frame_height };
 }

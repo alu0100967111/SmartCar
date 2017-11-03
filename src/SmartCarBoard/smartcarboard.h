@@ -58,7 +58,6 @@ public:
 private:
     Path AStar_Algorithm();
     AStarBoard InitializeBoardAStar();
-    void PrintAStarBoard(const AStarBoard &board, const AStarSet &open_set, const AStarSet &closed_set);
     int AStarDistance(AStarCell &current_cell);
     double AStarEstimateCost(AStarCell& neighbour_cell, AStarCell& goal);
     Path AStarReconstructPath(AStarCell* current_cell);
