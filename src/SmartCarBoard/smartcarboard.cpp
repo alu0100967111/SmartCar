@@ -30,8 +30,8 @@ SmartCarBoard::SmartCarBoard(const struct params &config, const struct size_stru
             qDebug() << "It's an automated block" << x << " " << y;
             obstacle_positions_.insert(Position(x, y));
             smart_car_board_[x][y] -> set_obstacle();
-
         }
+        block_number_ = 0;
     }
 }
 
@@ -56,7 +56,7 @@ void SmartCarBoard::slot_cell_clicked(int x_pos, int y_pos)
         smart_car_board_[x_pos][y_pos] -> set_obstacle();
         qApp->processEvents(); // Proceso eventos
     }
-    if (block_number_ == 0){
+    else if (block_number_ == 0){
         QThread::sleep(2);
         Path path;
         QTime time;
@@ -73,7 +73,6 @@ void SmartCarBoard::slot_cell_clicked(int x_pos, int y_pos)
 
         for ( auto x : path ) { std::cout << " { " << x.first << "," << x.second << " } ";}
         //SHOW STADISTICS
-        exit(1); // TODO: ¿Queremos esto?
     }
 }
 

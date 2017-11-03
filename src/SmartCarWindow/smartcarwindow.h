@@ -31,10 +31,11 @@ private:
 protected:
     QGridLayout* smart_car_layout;
     SmartCarBoard* smart_car_board;
+    bool auto_;
 
 public slots:
     int b1_clicked();
-    bool auto_;
+
 };
 
 #endif // SMARTCARWINDOW_H

@@ -2,6 +2,7 @@
 <ui version="4.0">
  <class>SmartCarWindow</class>
  <widget class="QMainWindow" name="SmartCarWindow">
+
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -10,9 +11,11 @@
     <height>600</height>
    </rect>
   </property>
+
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+
   <widget class="QWidget" name="SmartCarWidget">
    <property name="sizeIncrement">
     <size>
@@ -21,34 +24,35 @@
     </size>
    </property>
 
-<widget class="QPushButton" name="b1">
- <property name="geometry">
-  <rect>
-   <x>0</x>
-   <y>0</y>
-   <width>31</width>
-   <height>22</height>
-  </rect>
- </property>
+  <widget class="QPushButton" name="b1">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>31</width>
+     <height>22</height>
+    </rect>
+   </property>
 
- <property name="text">
-  <string>OK</string>
- </property>
-</widget>
+   <property name="text">
+    <string>OK</string>
+   </property>
+  </widget>
 
-<widget class="QGroupBox" name="stadistic">
- <property name="geometry">
-  <rect>
-   <x>10</x>
-   <y>559</y>
-   <width>731</width>
-   <height>31</height>
-  </rect>
- </property>
- <property name="title">
-  <string>Estadísticas</string>
- </property>
-</widget>
+  <widget class="QGroupBox" name="stadistic">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>559</y>
+     <width>731</width>
+     <height>31</height>
+    </rect>
+   </property>
+
+   <property name="title">
+    <string>Estadísticas</string>
+   </property>
+  </widget>
 
   </widget>
  </widget>

@@ -58,7 +58,7 @@ bool MainWindow::on_simular_clicked()
        qDebug() << ui->inputobs->text().remove(QChar('%'), Qt::CaseInsensitive);
 
        if (auto_) {
-          config.block_number = config.block_number = (ui->inputfilas->text().toFloat()*ui->inputcol->text().toFloat()) *
+          config.block_number = (ui->inputfilas->text().toFloat()*ui->inputcol->text().toFloat()) *
                   (ui->inputobs->text().remove(QChar('%'), Qt::CaseInsensitive).toFloat()/100);
           qDebug() << config.block_number;
        } else {
