@@ -111,5 +111,4 @@ int SmartCarWindow::b1_clicked(){
     main_window->show();
 
     this->close();
-
 }

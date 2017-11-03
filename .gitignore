@@ -9,7 +9,7 @@ src/*.pro.user
 src/*.pro.user.*
 src/*.qbs.user
 src/*.qbs.user.*
-build-*/*
+build-*/
 
 # QtCreator
 
