@@ -112,12 +112,14 @@ Path SmartCarBoard::AStar_Algorithm()
     smart_car_board_[x_pos][y_pos] -> PaintCell("background-color:red;"); qApp->processEvents();
     open_set.erase(open_set.begin());
     //Si la casilla que se va a analizar es la final, salir
+
     if (current_cell == goal){
         return AStarReconstructPath(&current_cell);
     }
     // Para las casillas de alrededor
     for (int i = -1; i <= 1; ++i) {
       for(int j = -1; j <= 1; ++j) {        
+
         // Condiciones de siguiente iteración
         if (i == 0 && j == 0) continue; // Es nuestra posición
         if (x_pos+i < 0 || x_pos+i >= row_number_ || y_pos+j < 0 || y_pos+j >= column_number_) continue;
@@ -160,7 +162,9 @@ Path SmartCarBoard::AStar_Algorithm()
         }
       }
     }
+
     //QThread::msleep(10);
+
   }
   return {};
 }
@@ -256,7 +260,9 @@ Path SmartCarBoard::AStarReconstructPath(AStarCell* current_cell)
 {
     qDebug() << "Returning Path...";
     Path total_path;
+
     int counter = 0;
+
     while (current_cell != NULL) {
        Position path_position = current_cell -> get_pos();
        total_path.push_back(path_position);
@@ -266,8 +272,10 @@ Path SmartCarBoard::AStarReconstructPath(AStarCell* current_cell)
        //Lo dibujamos
        if (total_path.size() != 1 && current_cell != NULL) {
            smart_car_board_[path_position.first][path_position.second] -> PaintCell("background-color:yellow;");
+
            counter++;
        }
+
 
     }
 
@@ -278,7 +286,9 @@ Path SmartCarBoard::AStarReconstructPath(AStarCell* current_cell)
         smart_car_board_[car_position_.first][car_position_.second] -> setPixmap(QPixmap("../photos/car.png"));
         qApp->processEvents();
     }
+
     std::cout << "Numero de movimientos: " << counter+1 << "\n";
+
     return total_path;
 }
 
