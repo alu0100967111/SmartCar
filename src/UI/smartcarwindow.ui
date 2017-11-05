@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SmartCarWindow</class>
+ <widget class="QMainWindow" name="SmartCarWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>841</width>
+    <height>658</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(242, 159, 76);</string>
+  </property>
+  <widget class="QWidget" name="SmartCarWidget">
+   <property name="sizeIncrement">
+    <size>
+     <width>1</width>
+     <height>1</height>
+    </size>
+   </property>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>10152</width>
+      <height>35</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="buttonsBar">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <property name="sizeConstraint">
+      <enum>QLayout::SetFixedSize</enum>
+     </property>
+     <item alignment="Qt::AlignLeft">
+      <widget class="QPushButton" name="restart">
+       <property name="minimumSize">
+        <size>
+         <width>75</width>
+         <height>33</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>75</width>
+         <height>33</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background: rgb(168, 110, 52);
+color: rgb(255, 255, 255);
+border-color: rgb(0, 0, 127);
+
+font: 16pt &quot;Lato&quot;;</string>
+       </property>
+       <property name="text">
+        <string>Restart</string>
+       </property>
+      </widget>
+     </item>
+     <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+      <widget class="QPushButton" name="start">
+       <property name="minimumSize">
+        <size>
+         <width>300</width>
+         <height>33</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>300</width>
+         <height>33</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background: rgb(168, 110, 52);
+color: rgb(255, 255, 255);
+border-color: rgb(0, 0, 127);
+
+font: 16pt &quot;Lato&quot;;</string>
+       </property>
+       <property name="text">
+        <string>PASO 1: ELEGIR COCHE</string>
+       </property>
+      </widget>
+     </item>
+     <item alignment="Qt::AlignRight">
+      <widget class="QPushButton" name="exit">
+       <property name="minimumSize">
+        <size>
+         <width>75</width>
+         <height>33</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>75</width>
+         <height>33</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background: rgb(168, 110, 52);
+color: rgb(255, 255, 255);
+border-color: rgb(0, 0, 127);
+
+font: 16pt &quot;Lato&quot;;</string>
+       </property>
+       <property name="text">
+        <string>Exit</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,25 @@
+# Qt-es
+
+src/object_script.*.Release
+src/object_script.*.Debug
+src/*_plugin_import.cpp
+src/.qmake.cache
+src/.qmake.stash
+src/*.pro.user
+src/*.pro.user.*
+src/*.qbs.user
+src/*.qbs.user.*
+build-*/
+src/SmartCar.pro.user
+
+# QtCreator
+
+src/*.autosave
+src/*/*.autosave
+
+# QtCtreator Qml
+src/*.qmlproject.user
+src/*.qmlproject.user.*
+
+# QtCtreator CMake
+src/CMakeLists.txt.user*
