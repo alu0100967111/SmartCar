@@ -280,7 +280,7 @@ Path SmartCarBoard::AStarReconstructPath(AStarCell* current_cell)
     }
 
     for (int i = total_path.size()-1; i == 0 ; i--) {
-        QThread::msleep(200);
+        //QThread::msleep(200);
         smart_car_board_[car_position_.first][car_position_.second] -> PaintCell("background-color:yellow;");
         car_position_ = total_path[i];
         smart_car_board_[car_position_.first][car_position_.second] -> setPixmap(QPixmap("../photos/car.png"));
