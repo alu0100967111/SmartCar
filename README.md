@@ -1,16 +1,45 @@
-# Inteligencia Artifical - Búsqueda
+# A* Search Algorithm
+Implementation of the A Star Search Algorithm in C++ and QT to find the shortest path between two positions.
 
-## Objetivo
+## Index
+* [About](#about)
+* [Usage](#usage)
+* [Authors](#authors)
+* [License](#license)
 
-El objetivo de esta práctica consiste en la implementación de una estrategia de búsqueda en un lenguaje de programación para la resolución de la determinación de la trayectoria óptima de un punto a otro en un entorno compuesto por celdas libres y ocupadas. Este escenario representa la determinación de la ruta óptima de un coche autónomo en el caso real.
+## About
 
-## Representación
+This program is an implementation of a shortest path algorithm (A*) using C++ and QT. The aim of this program is to find the
+optimum path between two positions of our board. Besides, the board will have obstacles that the program has to avoid.
 
-El entorno se representa como una matriz de dimensiones MxN constituido por celdas libres y ocupadas, un origen y un destino. Se explorará cada celda libre que pueda formar un camino siguiendo el orden que establece el algoritmo de búsqueda A*. Este algoritmo usa la función de evaluación f(n) = g(n)+h'(n) donde g(n) representa el coste del camino recorrido desde el origen hasta llegar a la celda n y h'(n)el valor heurístico de la celda a evaluar desde la celda actual. Las funciones heurísticas implementadas en esta práctica son las heurísticas Manhattan, Chebyshev y Euclídea.
-![alt text](photos/screenshot.png "Ejemplo tablero 25x25")
+The real context of the program is a SmartCar that has to find the shortest path to arrive to the aim.
 
-## Autores
+The context is represented by a MxN Matrix, filled with free and busy cells and a start and end position. 
+The program will explore each free cell that can be in the path, following the order of the A* Search Algorithm.
+This algorithm uses the evaluation function f(n) = g(n)+h'(n).
 
-### Alberto Jesús Gonzalez Álvarez
-### Martín Belda Sosa
-### Ángel Luis Igareta Herráiz
+1.  g(n) represents the cost of the travelled way from the start point to the cell n. 
+2.  h'(n) represents the heuristic value of the cell that has to be evaluated from the actual cell. The heuristic functions implemented in this program are Manhattan, Chebyshev y Euclídea.
+
+## Usage
+
+In order to use the program is neccesary to have QTCreator (https://www.qt.io/qt-features-libraries-apis-tools-and-ide/) installed. 
+
+After opening and building the project in QT the following screen will appear.
+
+![alt text](photos/initial-screen.png "Initial Screen")
+
+In the initial screen you can set the properties of the Board, such as Rows and Column numbers, obstacles quantity and Heuristic Algorithm.
+
+![alt text](photos/game-screen.png "Game Screen")
+
+In the game screen the steps to follow will appear at the top. Besides there are options to exit or restart the game.
+
+## Authors
+
+* Alberto Jesús Gonzalez Álvarez
+* Martín Belda Sosa
+* Ángel Luis Igareta Herráiz
+
+## License
+The Mit License.
